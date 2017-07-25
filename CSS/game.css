@@ -1,0 +1,40 @@
+/* Gives the Web Page a Gothic Taste*/
+body {
+	font-family : monospace,"Times New Roman",serif;
+	background-image : url("../Game/Images/background.jpg");
+}
+.content {
+	width : 50%;
+}
+/* 
+ This is so each distinct box is distinct.
+*/
+.info {
+	background-color : white; /* So that the player can see the content*/
+	padding : 5px;
+	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
+	
+}
+.infoBox {
+	padding : 3px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.infoLine p {
+	display : inline-block;
+}
+/*
+ So buttons look nice
+*/
+button {
+	text-decoration : underline;
+	text-align : center;
+	border : none;
+	outline:none;
+	font-weight : bold;
+	font-family : inherit;
+	background-color: Transparent; /* The colour of the Button is nothing */
+}
+
+button:hover {
+	cursor : pointer; /* Tells the user that this is clickable! */
+}
