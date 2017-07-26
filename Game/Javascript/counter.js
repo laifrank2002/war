@@ -1,11 +1,11 @@
-setInterval(passTime,200);
+var timeInterval = setInterval(passTime,1000);
 // graphics
-setInterval(update,20);
+var fpsInterval = setInterval(update,20);
 
 //init
 
 // Player Stats
-var GDP = 0;
+
 // Economy
 var time = 0;
 var days = 0;
@@ -22,9 +22,20 @@ var food = 0;
 var maxfood = 100;
 var addedfood = 1;
 
+// Workers
+var farmer = 0;
 // Misc Stats
 
+// Settings (Cookies)
+var speed = 1;
 
+
+// Calculated Stats
+var GDP = 0;
+var unemployment = 0;
+var safety = 0;
+var health = 0;
+var happiness = 0;
 // Military 
 var militiamen = 0;
 var swordmen = 0;
@@ -56,6 +67,13 @@ function passTime () {
 	makeResources();
 	// Updates Timestamp
 	timeStamp = years.toString() + " y " + days.toString() + " d: ";
+	
+	// Story Books marked on time
+	//switch (time) {
+	//	case 1:
+			//loadStoryMessage("../Messages/msg1.txt");
+			//break;
+	//}
 }
 
 function calculateDate (time) {
@@ -72,7 +90,7 @@ function makeResources (){
 	calculatePop();
 	
 	// Don't hit the ceiling!
-	if (food < maxfood){
+	if (food <= maxfood){ // <= instead of < so that it can decrease too!
 		food = food + addedfood;
 		food = +((food).toFixed(2));
 	}
@@ -80,19 +98,19 @@ function makeResources (){
 	if (food < 0) {
 		food = 0;
 	}
-	else if (food > maxfood){
+	else if (food > maxfood && addedfood > 0){ // Unless It's Under
 		food = maxfood; // Nor Over
 	}
 	// Don't hit the ceiling!
-	if (pop < maxpop){
+	if (pop <= maxpop){
 		pop = pop + addedpop;
 		pop = +((pop).toFixed(2));
 	}
 	// Ooops, you can't go under the floor!
-	if(pop < 0) {
+	if(pop < 0) { // <= instead of < so that it can decrease too!
 		pop = 0;
 	}
-	else if (pop > maxpop){
+	else if (pop > maxpop && addedpop > 0){
 		pop = maxpop; // Nor Over
 	}
 }
@@ -112,6 +130,9 @@ function calculateFood () {
 	
 	addedfood += (1.5 * farms);
 	
+	if (well) {
+		addedfood *= 1.5;
+	}
 	// max food
 	
 	
@@ -140,8 +161,39 @@ function calculatePop () {
 function calculateStatistics() {
 	GDP = addedmoney * 365;
 	GDP = roundTwo(GDP);
+	
+	// Statistics
+	unemployment = 100;
+	if (militiamen == 0){
+		safety = 0;
+	}
+	else{
+		safety = roundTwo((militiamen) / (pop)*100);
+		if (safety > 100){
+			safety = 100;
+		}
+	}
+	health = 0;
+	happiness = 100;
 }
 
+// Button Functions
+
+// Settings
+function speedUp() {
+	speed += 1;
+		clearInterval(timeInterval) // So not to produce multiple
+		timeInterval = setInterval(passTime,1000/speed);
+}
+function slowDown() {
+	if (speed > 1){
+		speed -= 1;
+		clearInterval(timeInterval) // So that it wouldn't just keep increasing
+		timeInterval = setInterval(passTime,1000/speed);
+	}
+	
+	
+}
 // Purchasing Functions
 // This is so the buttons would work
 function buyMilitiamen() {
@@ -243,11 +295,16 @@ function update () {
 	calculateStatistics();
 	// Economy
 	document.getElementById("timeDisplay").innerHTML = years + "y " + days + "d";
+	document.getElementById("speedDisplay").innerHTML = speed + " is the current speed";
 	document.getElementById("moneyDisplay").innerHTML = "$" + money.toFixed(2) + " + $" + addedmoney.toFixed(2) + "/d";
 	document.getElementById("foodDisplay").innerHTML = food.toFixed(2) + "/" + maxfood.toFixed(2) + " food" + " + " + addedfood.toFixed(2) + "/d";
 	document.getElementById("popDisplay").innerHTML = pop.toFixed(2) + "/" + maxpop.toFixed(2) + " pop" + " + " + addedpop.toFixed(2) + "/d";
 	// Fun Stats
-	document.getElementById("GDPDisplay").innerHTML = "$" + GDP.toFixed(2) + " is the current GDP of your nation!";
+	document.getElementById("GDPDisplay").innerHTML = "$" + GDP.toFixed(2) + " is the GDP of your nation!";
+	document.getElementById("unemploymentDisplay").innerHTML = unemployment.toFixed(2) + "% is the unemployment rate of your nation!";
+	document.getElementById("safetyDisplay").innerHTML = safety.toFixed(2) + "% is how safe citizens think of your nation!";
+	document.getElementById("healthDisplay").innerHTML = health.toFixed(2) + "% is how much healthcare citizens get in your nation!";
+	document.getElementById("happinessDisplay").innerHTML = happiness.toFixed(2) + "% is how happy people are with your regime!";
 	// Military
 	
 	document.getElementById("militiamenDisplay").innerHTML = "You have " + militiamen + " militiamen";
@@ -279,7 +336,7 @@ function update () {
 		document.getElementById("barrackDisplayButton").style.display = "inline";
 	}
 	
-	// Unlock for irrigation
+	// Unlock for wells
 	if (farms > 0){
 		if (!(well)) {
 			document.getElementById("wellDisplay").innerHTML = "The well has not been built yet.";
@@ -309,7 +366,123 @@ function pushMessage (messageText) {
 	var element = document.getElementById("Messages")
 	var child = document.getElementById("intro")
 	
-	element.insertBefore(messageNode,child);
+	element.appendChild(messageNode);
 	
 	messages += 1
+}
+
+// Loads Other Messages
+function loadStoryMessage(messageName){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("intro").innerHTML = this.responseText;
+			pushMessage(this.responseText);
+			console.log("Sucess!")
+		}
+	};
+	xhttp.open("GET", messageName, true);
+	xhttp.send();
+}
+
+// Saves -IMPORTANT- NOT SECURE!
+function SaveData () {
+	var saveFile = "";
+	// vars
+	saveFile += time + " ";
+	saveFile += money + " ";
+	saveFile += food + " ";
+	saveFile += pop + " ";
+	saveFile += militiamen + " ";
+	saveFile += swordmen + " ";
+	saveFile += archers + " ";
+	saveFile += barrack + " ";
+	saveFile += farms + " ";
+	saveFile += well + " ";
+	saveFile += house + " ";
+	saveFile += barn + " ";
+	
+	document.getElementById("ftpTextbox").value = saveFile;
+}
+// Loads -IMPORTANT- NOT SECURE!
+function LoadData () {
+	var loadFile = document.getElementById("ftpTextbox").value;
+	var data = "";
+	// 1 - int, 2 - float, 3 - boolean
+	var method = [1,2,2,2,1,1,1,3,1,3,1,1];
+	var result = [];
+	// Interpretter! 
+	var stage = 0;
+	for (i = 0; i < loadFile.length; i++) {
+		switch(method[stage]){
+			case 1 : //ints
+				switch(loadFile.substring(i, i+1)){
+					case "1":
+					case "2":
+					case "3":
+					case "4":
+					case "5":
+					case "6":
+					case "7":
+					case "8":
+					case "9":
+					case "0":
+						data += loadFile.substring(i, i+1);
+						
+					case " ": // breakup happens now
+						result.push(parseInt(data));
+						data = "";
+						stage ++;
+						break;
+				}
+			case 2 : //floats
+				switch(loadFile.substring(i, i+1)){
+					case "1":
+					case "2":
+					case "3":
+					case "4":
+					case "5":
+					case "6":
+					case "7":
+					case "8":
+					case "9":
+					case "0":
+					case ".":
+						data += loadFile.substring(i, i+1);
+					case " ": // breakup happens now
+						result.push(parseFloat(data));
+						data = "";
+						stage ++;
+						break;
+				}
+			
+			
+			case 3 : //booleans! 
+				switch(loadFile.substring(i, i+1)){
+					case "t":
+					case "r":
+					case "u":
+					case "e":
+					case "f":
+					case "a":
+					case "l":
+					case "s":
+						data += loadFile.substring(i, i+1);
+					case " ": //breakup!
+						if (data == "true") {
+							result.push(true)
+						}
+						else{
+							result.push(false)
+						}
+						data = "";
+						stage ++;
+						break;
+				}
+				
+		}
+		
+	}
+	console.log(result);
+
 }

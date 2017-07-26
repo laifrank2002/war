@@ -4,7 +4,8 @@ body {
 	background-image : url("../Game/Images/background.jpg");
 }
 .content {
-	width : 50%;
+	width : 600px;
+	margin : auto;
 }
 /* 
  This is so each distinct box is distinct.
@@ -22,6 +23,40 @@ body {
 .infoLine p {
 	display : inline-block;
 }
+/* So tooltips show up and stay down when it needs to be */
+.tooltip {
+	display : inline-block;
+	position: relative;
+}
+.tooltip .tooltiptext {
+	visibility : hidden;
+	background-color : grey;
+	color : black;
+	text-align : center;
+	padding : 5px 0;
+	border-radius: 6px;
+	/* Positioning */
+	position : absolute;
+	z-index: 1;
+	top: -5px;
+    left: 105%;
+	width : 300px;
+}
+/* Cool arrow thingy */
+.tooltip .tooltiptext::after {
+	content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent grey transparent transparent;
+}
+/* When hover, it will become visible */
+.tooltip:hover .tooltiptext {
+	visibility : visible;
+}
 /*
  So buttons look nice
 */
@@ -37,4 +72,8 @@ button {
 
 button:hover {
 	cursor : pointer; /* Tells the user that this is clickable! */
+}
+/* Users are dumb, the text-area is better */
+textarea {
+    resize: none;
 }

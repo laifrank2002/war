@@ -45,20 +45,34 @@
 			<button type="button" onclick="MilitaryTab()">Military</button>
 			<button type="button" onclick="BuildingsTab()">Buildings</button>
 			<button type="button" onclick="MessagesTab()">Messages</button>
-			
+			<button type="button" onclick="SettingsTab()">Settings</button>
 			
 			<!-- Information -->
 			<div class = "infoBox" id="Overview">
 				<h2>Overview</h2>
 				<p type = "text" id="timeDisplay"></p>
+				<p type = "text" id="speedDisplay"></p> 
+				<div class="tooltip">
+					<button type="button" onclick="speedUp()">Speed Up</button>
+					<span class="tooltiptext"> Makes time go faster!</span>
+				</div>
+				<div class="tooltip">
+					<button type="button" onclick="slowDown()">Slow Down</button>
+					<span class="tooltiptext"> Slows time down! Cannot go below 1.</span>
+				</div>
 				<p type = "text" id="moneyDisplay"></p>
 				<p type = "text" id="foodDisplay"></p>
 				<p type = "text" id="popDisplay"></p>
+				
 			</div>
 			<div class = "infoBox" id="Economy">
 				<h2>Economy</h2>
-				
 				<p type = "text" id="GDPDisplay"></p>
+				<!-- The Rates -->
+				<p type = "text" id="unemploymentDisplay"></p>
+				<p type = "text" id="safetyDisplay"></p>
+				<p type = "text" id="healthDisplay"></p>
+				<p type = "text" id="happinessDisplay"></p>
 			</div>
 			<div class = "infoBox" id="Military">
 				<h2>Military</h2>
@@ -79,34 +93,71 @@
 			</div>
 			<div class = "infoBox" id="Buildings">
 				<h2>Buildings</h2>
-				<div class = "infoLine"> <p type = "text" id="barrackDisplay">The Barrack Is Not Built</p> 
-					<button type="button" onclick="buyBarrack()" id="barrackDisplayButton">$100</button> </div>
-					
-				<div class = "infoLine"> <p type = "text" id="farmsDisplay"></p> 
-					<button type="button" onclick="buyFarms()">$10</button> </div>
-					
-				<div class = "infoLine"> <p type = "text" id="wellDisplay"></p> 
-					<button type="button" onclick="buyWell()" id="wellDisplayButton">$50</button> </div>
 				
-				<div class = "infoLine"> <p type = "text" id="houseDisplay"></p> 
-					<button type="button" onclick="buyHouse()" id = "houseDisplayButton">$75</button> </div>
-					
-				<div class = "infoLine"> <p type = "text" id="barnDisplay"></p> 
-					<button type="button" onclick="buyBarn()" id ="barnDisplayButton">$100</button> </div>
+				<div class = "infoLine"> 
+					<p type = "text" id="barrackDisplay">The Barrack Is Not Built</p> 
+					<div class="tooltip">
+						<button type="button" onclick="buyBarrack()" id="barrackDisplayButton">$100</button> 
+						<span class="tooltiptext"> Allows you to hire swordsmen and archers!</span>
+					</div>
+				</div>
 				
-				<div class = "infoLine"> <p type = "text" id=""></p> 
-					<button type="button" onclick=""></button> </div>
+				<div class = "infoLine"> 
+					<p type = "text" id="farmsDisplay"></p> 
+					<div class="tooltip">
+						<button type="button" onclick="buyFarms()">$10</button> 
+						<span class="tooltiptext"> Produces 1.5 food each, you'll need it to feed your populace! </span>
+					</div>
+				</div>
 					
+				<div class = "infoLine"> 
+					<p type = "text" id="wellDisplay"></p> 
+					<div class="tooltip">
+						<button type="button" onclick="buyWell()" id="wellDisplayButton">$50</button> 
+						<span class="tooltiptext"> Enhances your food production by 50%! Also, provides water.</span>
+					</div>
+				</div>
+				
+				<div class = "infoLine"> 
+					<p type = "text" id="houseDisplay"></p> 
+					<div class="tooltip">
+						<button type="button" onclick="buyHouse()" id = "houseDisplayButton">$75</button> 
+						<span class="tooltiptext"> Houses 5 extra people in your nation.</span>
+					</div>
+				</div>
+					
+				<div class = "infoLine"> 
+					<p type = "text" id="barnDisplay"></p> 
+					<div class="tooltip">
+						<button type="button" onclick="buyBarn()" id ="barnDisplayButton">$100</button> 
+						<span class="tooltiptext"> Stores an extra 500 food, in better conditions.</span>
+					</div>
+				</div>
+					
+				<div class = "infoLine"> 
+					<p type = "text" id=""></p> 
+					<div class="tooltip">
+						<button type="button" onclick="()" id =""></button> 
+						<span class="tooltiptext"></span>
+					</div>
+				</div>
 					
 				<p>in your kingdom</p>
 			</div>
 			<div class = "infoBox" id="Messages">
 				<h2>Messages</h2>
-				<p type = "text" id="intro">0 d 0 y: What a terrible job, I've just been appointed the governor of ... 
-					I don't even know what this back-water nation is called! I don't think this place is even incorporated!
-					I can't believe that Isadore guy got the cushy job as governor of Canonmore instead of me. Well, there's
-					no use complaining; I've got to fix up this place, it's a mess! Let's start with the food situation.</p>
+				<p id="intro"> </p>
 			</div>
+			<div class = "infoBox" id="Settings">
+				<h2>Settings</h2>
+				<textarea rows="10" cols="75" id="ftpTextbox" 
+					placeholder="This is where the text goes when you click Save or when you click Load. Copy the text into somewhere safe!"></textarea>
+				<div>
+					<button type="button" onclick="SaveData()">Save</button>
+					<button type="button" onclick="LoadData()">Load</button>
+				</div>
+			</div>
+			
 		</div>
 		
 	</div>
