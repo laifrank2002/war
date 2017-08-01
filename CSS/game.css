@@ -4,7 +4,7 @@ body {
 	background-image : url("../Game/Images/background.jpg");
 }
 .content {
-	
+	top : 0px;
 }
 /* 
  This is so each distinct box is distinct.
@@ -36,7 +36,7 @@ body {
 }
 /* Don't take up too much space for messages, scrolling is cool */
 #Messages {
-	height : 300px;
+	height : 280px;
 	overflow : scroll;
 	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */
 
