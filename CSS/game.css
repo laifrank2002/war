@@ -4,8 +4,7 @@ body {
 	background-image : url("../Game/Images/background.jpg");
 }
 .content {
-	width : 600px;
-	margin : auto;
+	
 }
 /* 
  This is so each distinct box is distinct.
@@ -14,6 +13,9 @@ body {
 	background-color : white; /* So that the player can see the content*/
 	padding : 5px;
 	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
+	width : 600px;
+	margin : 0 0 0 10px;
+	float : left;
 	
 }
 .infoBox {
@@ -23,6 +25,22 @@ body {
 .infoLine p {
 	display : inline-block;
 }
+/* Resource Info Box*/
+.overview {
+	float : left; /* So it would not conflict with the centerpiece */
+	background-color : white; /* So that the player can see the content*/
+	padding : 5px;
+	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
+	width : 200px;
+	
+}
+/* Don't take up too much space for messages, scrolling is cool */
+#Messages {
+	height : 300px;
+	overflow : scroll;
+	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */
+
+}
 /* So tooltips show up and stay down when it needs to be */
 .tooltip {
 	display : inline-block;
@@ -31,10 +49,11 @@ body {
 .tooltip .tooltiptext {
 	visibility : hidden;
 	background-color : grey;
-	color : black;
+	color : white;
 	text-align : center;
 	padding : 5px 0;
 	border-radius: 6px;
+	font-weight : normal;
 	/* Positioning */
 	position : absolute;
 	z-index: 1;
@@ -76,4 +95,8 @@ button:hover {
 /* Users are dumb, the text-area is better */
 textarea {
     resize: none;
+}
+/* Custom h3 formatting for the diplomacy tab */
+.infoLine h3{
+	font-weight : normal;
 }
