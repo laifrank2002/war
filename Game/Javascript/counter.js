@@ -99,8 +99,7 @@ var timeStamp = "";
 
 // Initial
 LoadData();
-
-
+alert("This game requires cookies to run. The manual saving system isn't implemented yet, so wait a while")
 // Floating Point Error Resolver
 function roundTwo (value){
 	return +((value).toFixed(2));
@@ -480,6 +479,7 @@ function SaveData () {
 	var toSavedData = [time,money,food,pop,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost];
 
 	set_cookie('save',toSavedData)
+	pushMessage("Saved!");
 }
 // Loads Data, in Cookie form!
 function LoadData () {
@@ -506,7 +506,6 @@ function LoadData () {
 function autoSave(){
 	SaveData();
 	LoadData();
-	pushMessage("Saved!");
 }
 
 function setAutoSave(delay){
