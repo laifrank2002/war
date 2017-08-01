@@ -1,9 +1,46 @@
+// V0.04 P-Alpha
+/* TDL
+ Rewrite HTML, remove annoying navBar, no, the other one at the tippy top that's blue.
+ If you have no idea who I mean, that means you should remove this message. Or you're colourblind. 
+ 
+ // function from another person
+ https://rawgit.com/IvarK/BuildASpaceShip/master/index.html
+
+ Longbow men
+ Pikemen
+ Diplomacy Actions, More Factions.
+ Events
+ War
+ Save/Load
+ Resources:
+	Ores
+		Gold Ore
+		Iron Ore 
+		Bronze Ore
+		Silver Ore
+		Coal
+		Charcoal
+		Sand
+	Bars
+		Iron
+		Bronze
+		Gold
+		Silver
+		Steel
+		Glass
+	Construction
+		Wood
+		Plank
+		Nails
+		Gold Foil
+		Plaster of Paris
+		
+	Replace $$$ with Gold, Silver, Bronze coins
+*/
 var timeInterval = setInterval(passTime,1000);
-// graphics
 var fpsInterval = setInterval(update,20);
-
+var saveInterval = setInterval(autoSave,1000);
 //init
-
 // Player Stats
 
 // Economy
@@ -47,6 +84,7 @@ var archers = 0;
 // One timers
 var barrack = false;
 var well = false;
+var outpost = false;
 // Unlimited
 var farms = 0;
 var house = 0;
@@ -55,6 +93,10 @@ var barn = 0;
 // Messages module declarations
 var messages = 0;
 var timeStamp = "";
+
+// Initial
+LoadData();
+
 
 // Floating Point Error Resolver
 function roundTwo (value){
@@ -181,9 +223,11 @@ function calculateStatistics() {
 
 // Settings
 function speedUp() {
-	speed += 1;
+	if (speed < 10){ //They can't go *too* fast.
+		speed += 1;
 		clearInterval(timeInterval) // So not to produce multiple
 		timeInterval = setInterval(passTime,1000/speed);
+	}
 }
 function slowDown() {
 	if (speed > 1){
@@ -191,8 +235,10 @@ function slowDown() {
 		clearInterval(timeInterval) // So that it wouldn't just keep increasing
 		timeInterval = setInterval(passTime,1000/speed);
 	}
-	
-	
+	else if (speed = 1){
+		speed -= 1;
+		clearInterval(timeInterval) //Pauses
+	}
 }
 // Purchasing Functions
 // This is so the buttons would work
@@ -281,11 +327,21 @@ function buyHouse() {
 
 function buyBarn() {
 	if (money >= 100) {
-		money -= 75;
+		money -= 100;
 		barn += 1;
 		
 		//Alert Messages
 		pushMessage ("Raised a barn.");
+	}
+}
+
+function buyOutpost() {
+	if (money >= 250) {
+		money -= 250;
+		outpost = true;
+		
+		//Alert Messages
+		pushMessage ("Built the outpost, doesn't look sturdy.");
 	}
 }
 // This is so there is data on the screen.
@@ -350,6 +406,36 @@ function update () {
 	else {
 		document.getElementById("wellDisplayButton").style.display = "none";
 	}
+	// Unlock for outpost
+	if (barrack){
+		if(!(outpost)){
+			document.getElementById("outpostDisplay").innerHTML = "The outpost has not been built yet.";
+			document.getElementById("outpostDisplayButton").style.display = "inline-block";
+		}
+		else {
+			document.getElementById("outpostDisplay").innerHTML = "The outpost has been built.";
+			document.getElementById("outpostDisplayButton").style.display = "none";
+		}
+	}
+	else {
+		document.getElementById("outpostDisplayButton").style.display = "none";
+	}
+	// Unlock for 
+	/*
+	if (){
+		if(!()){
+			
+		
+		}
+		else {
+			
+			
+		}
+	}
+	else {
+		
+	}
+	*/
 	// No Limiters
 	document.getElementById("farmsDisplay").innerHTML = "There are " + farms + " farms in the kingdom.";
 	document.getElementById("houseDisplay").innerHTML = "There are " + house + " houses in the kingdom.";
@@ -385,104 +471,71 @@ function loadStoryMessage(messageName){
 	xhttp.send();
 }
 
-// Saves -IMPORTANT- NOT SECURE!
+// Saves, in Cookie form!
 function SaveData () {
-	var saveFile = "";
-	// vars
-	saveFile += time + " ";
-	saveFile += money + " ";
-	saveFile += food + " ";
-	saveFile += pop + " ";
-	saveFile += militiamen + " ";
-	saveFile += swordmen + " ";
-	saveFile += archers + " ";
-	saveFile += barrack + " ";
-	saveFile += farms + " ";
-	saveFile += well + " ";
-	saveFile += house + " ";
-	saveFile += barn + " ";
-	
-	document.getElementById("ftpTextbox").value = saveFile;
-}
-// Loads -IMPORTANT- NOT SECURE!
-function LoadData () {
-	var loadFile = document.getElementById("ftpTextbox").value;
-	var data = "";
-	// 1 - int, 2 - float, 3 - boolean
-	var method = [1,2,2,2,1,1,1,3,1,3,1,1];
-	var result = [];
-	// Interpretter! 
-	var stage = 0;
-	for (i = 0; i < loadFile.length; i++) {
-		switch(method[stage]){
-			case 1 : //ints
-				switch(loadFile.substring(i, i+1)){
-					case "1":
-					case "2":
-					case "3":
-					case "4":
-					case "5":
-					case "6":
-					case "7":
-					case "8":
-					case "9":
-					case "0":
-						data += loadFile.substring(i, i+1);
-						
-					case " ": // breakup happens now
-						result.push(parseInt(data));
-						data = "";
-						stage ++;
-						break;
-				}
-			case 2 : //floats
-				switch(loadFile.substring(i, i+1)){
-					case "1":
-					case "2":
-					case "3":
-					case "4":
-					case "5":
-					case "6":
-					case "7":
-					case "8":
-					case "9":
-					case "0":
-					case ".":
-						data += loadFile.substring(i, i+1);
-					case " ": // breakup happens now
-						result.push(parseFloat(data));
-						data = "";
-						stage ++;
-						break;
-				}
-			
-			
-			case 3 : //booleans! 
-				switch(loadFile.substring(i, i+1)){
-					case "t":
-					case "r":
-					case "u":
-					case "e":
-					case "f":
-					case "a":
-					case "l":
-					case "s":
-						data += loadFile.substring(i, i+1);
-					case " ": //breakup!
-						if (data == "true") {
-							result.push(true)
-						}
-						else{
-							result.push(false)
-						}
-						data = "";
-						stage ++;
-						break;
-				}
-				
-		}
-		
-	}
-	console.log(result);
+	// Convinience
+	var toSavedData = [time,money,food,pop,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost];
 
+	set_cookie('save',toSavedData)
 }
+// Loads Data, in Cookie form!
+function LoadData () {
+	var save_data = get_cookie('save');
+	console.log(save_data)
+    if (!save_data) {return};
+	var resultData = save_data;
+	console.log(resultData);
+	time = resultData[0];
+	money = resultData[1];
+	food = resultData[2];
+	pop = resultData[3];
+	militiamen = resultData[4];
+	swordmen = resultData[5];
+	archers = resultData[6];
+	barrack = resultData[7];
+	farms = resultData[8];
+	well = resultData[9]
+	house = resultData[10]
+	barn = resultData[11]
+	outpost = resultData[12]
+}
+
+function autoSave(){
+	SaveData();
+	LoadData();
+	pushMessage("Saved!");
+}
+
+function setAutoSave(delay){
+	clearInterval(saveInterval) //Prevents duplicates
+	setInterval(autoSave,delay)
+}
+
+// Copied Function
+
+//saving mechanics
+function set_cookie(cookie_name,value) {
+    expiry = new Date();   
+    expiry.setTime(new Date().getTime() + (365*24*60*60*1000)); 
+    var c_value=escape(btoa(JSON.stringify(value))) + 
+    "; expires="+expiry.toUTCString();
+    document.cookie=cookie_name + "=" + c_value;
+}
+
+function get_cookie(cookie_name) {
+    var c_value = document.cookie;
+	console.log(document.cookie);
+    var c_start = c_value.indexOf(" " + cookie_name + "=");
+    if (c_start == -1) {
+        c_start = c_value.indexOf(cookie_name + "=");
+    }
+    if (c_start == -1) return false;
+    c_start = c_value.indexOf("=", c_start) + 1;
+    var c_end = c_value.indexOf(";", c_start);
+    if (c_end == -1) {
+        c_end = c_value.length;
+    }
+    c_value = atob(unescape(c_value.substring(c_start,c_end)));
+    return JSON.parse(c_value);
+}
+
