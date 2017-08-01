@@ -11,7 +11,10 @@
  Diplomacy Actions, More Factions.
  Events
  War
- Save/Load
+ Import/Export
+ Trading
+ Import/Export(Data)
+ Spying?
  Resources:
 	Ores
 		Gold Ore
@@ -39,7 +42,7 @@
 */
 var timeInterval = setInterval(passTime,1000);
 var fpsInterval = setInterval(update,20);
-var saveInterval = setInterval(autoSave,1000);
+var saveInterval = setInterval(autoSave,30000);
 //init
 // Player Stats
 
