@@ -6,6 +6,7 @@
  // function from another person
  https://rawgit.com/IvarK/BuildASpaceShip/master/index.html
 
+ Destroy Buildings 
  Longbow men
  Pikemen
  Diplomacy Actions, More Factions.
@@ -45,20 +46,22 @@ var fpsInterval = setInterval(update,20);
 var saveInterval = setInterval(autoSave,30000);
 //init
 // Player Stats
-
-// Economy
 var time = 0;
+var money = 75;
+var pop = 0;
+var food = 0;
+
+var territory = 15;
+var usedTerritory = 0; 
+// Economy
 var days = 0;
 var years = 0;
 
-var money = 75;
 var addedmoney = 0.01;
 
-var pop = 0;
 var maxpop = 10;
 var addedpop = 0.1;
 
-var food = 0;
 var maxfood = 100;
 var addedfood = 1;
 
@@ -281,67 +284,82 @@ function buyArchers() {
 	}
 }
 
-// Buildings
+// Buildings, Territory Costs
 function buyBarrack () {
-	if (money >= 100 && !(barrack)){
+	if (money >= 100 && !(barrack) && (usedTerritory + 2 <= territory)){
 		barrack = true;
 		money -= 100;
+		usedTerritory += 2;
+
 		money=roundTwo(money);
+		usedTerritory=roundTwo(usedTerritory)
 		
 		//Alert Messages
 		pushMessage ("Built the barracks.");
 	}
 }
 function buyFarms () {
-	if (money >= 10) {
+	if (money >= 10 && usedTerritory + 1 <= territory) {
 		money -= 10;
 		farms += 1;
-		
+		usedTerritory += 1;
+
 		money=roundTwo(money);
-		
+		usedTerritory=roundTwo(usedTerritory)
+
 		//Alert Messages
 		pushMessage ("Bought a farm.");
 	}
 }
 
 function buyWell () {
-	if (money >= 50 && !(well)) {
+	if (money >= 50 && !(well) && usedTerritory + 1 <= territory) {
 		money -= 50;
 		well = true;
-		
+		usedTerritory += 1;
+
 		money=roundTwo(money);
-		
+		usedTerritory=roundTwo(usedTerritory)
+
 		//Alert Messages
 		pushMessage ("Built a well.");
 	}
 }
 
 function buyHouse() {
-	if (money >= 75) {
+	if (money >= 75 && usedTerritory + 1 <= territory) {
 		money -= 75;
 		house += 1;
-		
+		usedTerritory += 1;
+
 		money=roundTwo(money);
+		usedTerritory=roundTwo(usedTerritory)
 		//Alert Messages
 		pushMessage ("Bought a house.");
 	}
 }
 
 function buyBarn() {
-	if (money >= 100) {
+	if (money >= 100 && usedTerritory + 1 <= territory) {
 		money -= 100;
 		barn += 1;
+		usedTerritory += 1;
 		
+		money=roundTwo(money);
+		usedTerritory=roundTwo(usedTerritory)
 		//Alert Messages
 		pushMessage ("Raised a barn.");
 	}
 }
 
 function buyOutpost() {
-	if (money >= 250) {
+	if (money >= 250 && usedTerritory + 3 <= territory) {
 		money -= 250;
 		outpost = true;
+		usedTerritory += 3;
 		
+		money=roundTwo(money);
+		usedTerritory=roundTwo(usedTerritory)
 		//Alert Messages
 		pushMessage ("Built the outpost, doesn't look sturdy.");
 	}
@@ -357,6 +375,7 @@ function update () {
 	document.getElementById("moneyDisplay").innerHTML = "$" + money.toFixed(2) + " + $" + addedmoney.toFixed(2) + "/d";
 	document.getElementById("foodDisplay").innerHTML = food.toFixed(2) + "/" + maxfood.toFixed(2) + " food" + " + " + addedfood.toFixed(2) + "/d";
 	document.getElementById("popDisplay").innerHTML = pop.toFixed(2) + "/" + maxpop.toFixed(2) + " pop" + " + " + addedpop.toFixed(2) + "/d";
+	document.getElementById("territoryDisplay").innerHTML = usedTerritory.toFixed(2) + "/" + territory.toFixed(2) + " territory";
 	// Fun Stats
 	document.getElementById("GDPDisplay").innerHTML = "$" + GDP.toFixed(2) + " is the GDP of your nation!";
 	document.getElementById("unemploymentDisplay").innerHTML = unemployment.toFixed(2) + "% is the unemployment rate of your nation!";
@@ -476,7 +495,7 @@ function loadStoryMessage(messageName){
 // Saves, in Cookie form!
 function SaveData () {
 	// Convinience
-	var toSavedData = [time,money,food,pop,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost];
+	var toSavedData = ["0.04",time,money,food,pop,territory,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost];
 
 	set_cookie('save',toSavedData)
 	pushMessage("Saved!");
@@ -487,20 +506,21 @@ function LoadData () {
 	console.log(save_data)
     if (!save_data) {return};
 	var resultData = save_data;
-	console.log(resultData);
-	time = resultData[0];
-	money = resultData[1];
-	food = resultData[2];
-	pop = resultData[3];
-	militiamen = resultData[4];
-	swordmen = resultData[5];
-	archers = resultData[6];
-	barrack = resultData[7];
-	farms = resultData[8];
-	well = resultData[9]
-	house = resultData[10]
-	barn = resultData[11]
-	outpost = resultData[12]
+	
+	time = resultData[1];
+	money = resultData[2];
+	food = resultData[3];
+	pop = resultData[4];
+	territory = resultData[5];
+	militiamen = resultData[6];
+	swordmen = resultData[7];
+	archers = resultData[8];
+	barrack = resultData[9];
+	farms = resultData[10];
+	well = resultData[11];
+	house = resultData[12];
+	barn = resultData[13];
+	outpost = resultData[14];
 }
 
 function autoSave(){
