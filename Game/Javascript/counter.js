@@ -122,7 +122,6 @@ function passTime () {
 			loadStoryMessage("../Messages/msg1.txt");
 			break;
 	}
-	
 }
 
 function calculateDate (time) {
