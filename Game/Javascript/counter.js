@@ -103,6 +103,7 @@ var timeStamp = "";
 // Initial
 LoadData();
 alert("This game requires cookies to run. The manual saving system isn't implemented yet, so wait a while")
+
 // Floating Point Error Resolver
 function roundTwo (value){
 	return +((value).toFixed(2));
@@ -116,11 +117,11 @@ function passTime () {
 	timeStamp = years.toString() + " y " + days.toString() + " d: ";
 	
 	// Story Books marked on time
-	//switch (time) {
-	//	case 1:
-			//loadStoryMessage("../Messages/msg1.txt");
-			//break;
-	//}
+	switch (time) {
+		case 1:
+			loadStoryMessage("../Messages/msg1.txt");
+			break;
+	
 }
 
 function calculateDate (time) {
@@ -475,6 +476,8 @@ function pushMessage (messageText) {
 	
 	element.appendChild(messageNode);
 	
+	// Scrolls Down Automatically
+	document.getElementById("Messages").scrollTop += 500;
 	messages += 1
 }
 
@@ -483,7 +486,6 @@ function loadStoryMessage(messageName){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("intro").innerHTML = this.responseText;
 			pushMessage(this.responseText);
 			console.log("Sucess!")
 		}
@@ -496,15 +498,64 @@ function loadStoryMessage(messageName){
 function SaveData () {
 	// Convinience
 	var toSavedData = ["0.04",time,money,food,pop,territory,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost];
-
-	set_cookie('save',toSavedData)
+	
+	set_cookie("save",toSavedData);
+	TextboxSave("ftpTextbox",toSavedData);
+	
 	pushMessage("Saved!");
+	
+}
+
+// Saves Data, in Local Storage Object form! It's slightly less tasty.
+function SaveLocalData () {
+	// Convinience
+	var toSavedData = ["0.04",time,money,food,pop,territory,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost];
+	if(typeof(Storage) !== "undefined"){
+		Set_LocalStorage("saveFile",toSavedData);
+		pushMessage("Saved sucessfully");
+	} else {
+		pushMessage("Not saved sucessfully, unable to access local web storage.");
+	}
+	
+}
+// Local Storage Backup! Saves AND Loads!
+function Set_LocalStorage (object_name,value) {
+	
+	var object_value = btoa(JSON.stringify(value));
+	localStorage.setItem(object_name,object_value);
+	console.log(object_value);
+}
+
+function Get_LocalStorage(object_name){
+	var object_value = localStorage.getItem(object_name);	
+	object_value = atob(object_value);
+	return JSON.parse(object_value);
+	
+}
+// TXT Backup
+function TextboxSave (Id,Value){
+	document.getElementById(Id).value = btoa(Value);
+}
+function TextboxLoad (Id){
+	return atob(document.getElementById(Id).value)
 }
 // Loads Data, in Cookie form!
 function LoadData () {
-	var save_data = get_cookie('save');
-	console.log(save_data)
-    if (!save_data) {return};
+	var save_data = get_cookie('save');	
+	LoadIntoProgram(save_data)
+}
+
+function LoadLocalData() {
+	var save_data = Get_LocalStorage("saveFile");
+	LoadIntoProgram(save_data);
+	pushMessage("Loaded!")
+}
+
+function LoadIntoProgram(save_data){
+	
+	var defs_data = ["0.04",0,75,0,0,15,0,0,0,false,0,false,0,0,false];
+
+	if (!save_data) {return};
 	var resultData = save_data;
 	
 	time = resultData[1];
@@ -522,7 +573,6 @@ function LoadData () {
 	barn = resultData[13];
 	outpost = resultData[14];
 }
-
 function autoSave(){
 	SaveData();
 	LoadData();
@@ -546,7 +596,7 @@ function set_cookie(cookie_name,value) {
 
 function get_cookie(cookie_name) {
     var c_value = document.cookie;
-	console.log(document.cookie);
+
     var c_start = c_value.indexOf(" " + cookie_name + "=");
     if (c_start == -1) {
         c_start = c_value.indexOf(cookie_name + "=");
