@@ -117,11 +117,10 @@ function passTime () {
 	timeStamp = years.toString() + " y " + days.toString() + " d: ";
 	
 	// Story Books marked on time
-	switch (time) {
-		case 1:
-			loadStoryMessage("../Messages/msg1.txt");
-			break;
-	}
+	
+	loadStoryMessage("../Messages/msg1.txt");
+
+	
 }
 
 function calculateDate (time) {
