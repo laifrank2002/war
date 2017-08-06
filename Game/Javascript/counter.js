@@ -121,6 +121,7 @@ function passTime () {
 		case 1:
 			loadStoryMessage("../Messages/msg1.txt");
 			break;
+	}
 	
 }
 
