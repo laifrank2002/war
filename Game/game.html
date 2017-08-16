@@ -6,14 +6,9 @@
 	<title>A Small War</title>
 	<meta charset = UTF-8/>
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../CSS/style.css">
-	<link rel="stylesheet" type="text/css" href="../CSS/game.css">
+	<link rel="stylesheet" type="text/css" href="CSS/style.css">
 	<!-- Custom Style -->
-	<style>
-		body {
-			background-color : #ffffff;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="CSS/game.css">
 	<!-- numbering script -->
 	<script src="Javascript/counter.js"> </script>
 	
@@ -59,14 +54,13 @@
 			<h1>A Little War</h1>
 			<p>Welcome General, to your nation! Here are the latest statistics on your nation.</p>
 			<!-- Switching NavBar -->
-			<script src="Javascript/navDisplay.js"> </script><!-- So the switcheroo will work, loading uncluttered script -->
 			<button type="button" onclick="showAllTabs()">Show All</button>
 			<button type="button" onclick="EconomyTab()">Economy</button>
 			<button type="button" onclick="MilitaryTab()">Military</button>
 			<button type="button" onclick="BuildingsTab()">Buildings</button>
 			<button type="button" onclick="DiplomacyTab()">Diplomacy</button>
 			<button type="button" onclick="SettingsTab()">Settings</button>
-			
+
 			<div class = "infoBox" id="Economy">
 				<h2>Economy</h2>
 				<p type = "text" id="GDPDisplay"></p>
@@ -75,7 +69,12 @@
 				<p type = "text" id="safetyDisplay"></p>
 				<p type = "text" id="healthDisplay"></p>
 				<p type = "text" id="happinessDisplay"></p>
+				
+				<h3>Resources</h3>
+				<p type = "text" id=""> </p>
+				
 			</div>
+			
 			<div class = "infoBox" id="Military">
 				<h2>Military</h2>
 				
@@ -328,11 +327,13 @@
 				</div>
 				<p>Created by Francis Valeria(Frank Lai), 2017, with a lot of trial, error, and frustration.</p>
 				<p>This is the v 0.004 Pre-Alpha </p>
-				<a href="../index.html">Back to me</a>
+				<a href="../index.html" target="_blank">Back to me</a>
 			</div>
 			
 		</div>
 		
+		<script src="Javascript/navDisplay.js"> </script><!-- So the switcheroo will work, loading uncluttered script -->
+
 	</div>
 	
 </body>

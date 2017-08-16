@@ -44,3 +44,5 @@ function tabAll(display){
 		}
 	}
 }
+// Initialization
+EconomyTab();

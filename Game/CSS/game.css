@@ -1,0 +1,110 @@
+/* Gives the Web Page a Gothic Taste*/
+body {
+	font-family : monospace,"Times New Roman",serif;
+	background-image : url("../Images/background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center; /* center the image */
+
+}
+.content {
+	top : 0px;
+}
+/* 
+ This is so each distinct box is distinct.
+*/
+.info {
+	background-color : white; /* So that the player can see the content*/
+	padding : 5px;
+	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
+	width : 600px;
+	margin : 0 0 0 10px;
+	float : left;
+	
+	height : 580px; /* No everlong trail */
+	overflow : scroll; /* Scrollbars */
+	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */
+	
+}
+.infoBox {
+	padding : 3px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.infoLine p {
+	display : inline-block;
+}
+/* Resource Info Box*/
+.overview {
+	float : left; /* So it would not conflict with the centerpiece */
+	background-color : white; /* So that the player can see the content*/
+	padding : 5px;
+	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
+	width : 200px;
+	
+}
+/* Don't take up too much space for messages, scrolling is cool */
+#Messages {
+	height : 280px; /* No everlong trail */
+	overflow : scroll; /* Scrollbars */
+	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */
+
+}
+/* So tooltips show up and stay down when it needs to be */
+.tooltip {
+	display : inline-block;
+	position: relative;
+}
+.tooltip .tooltiptext {
+	visibility : hidden;
+	background-color : grey;
+	color : white;
+	text-align : center;
+	padding : 5px 0;
+	border-radius: 6px;
+	font-weight : normal;
+	/* Positioning */
+	position : absolute;
+	z-index: 1;
+	top: -5px;
+    left: 105%;
+	width : 300px;
+}
+/* Cool arrow thingy */
+.tooltip .tooltiptext::after {
+	content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent grey transparent transparent;
+}
+/* When hover, it will become visible */
+.tooltip:hover .tooltiptext {
+	visibility : visible;
+}
+/*
+ So buttons look nice
+*/
+button {
+	text-decoration : underline;
+	text-align : center;
+	border : none;
+	outline:none;
+	font-weight : bold;
+	font-family : inherit;
+	background-color: Transparent; /* The colour of the Button is nothing */
+}
+
+button:hover {
+	cursor : pointer; /* Tells the user that this is clickable! */
+}
+/* Users are dumb, the text-area is better */
+textarea {
+    resize: none;
+}
+/* Custom h3 formatting for the diplomacy tab */
+.infoLine h3{
+	font-weight : normal;
+}

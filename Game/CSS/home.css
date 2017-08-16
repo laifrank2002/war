@@ -1,0 +1,45 @@
+body {
+	font-family : calibri,arial,serif;
+}
+ul {
+	background-image : url("../Images/navbar.png");
+	border-bottom : ridge;
+
+}
+li {
+	background-color : #0066CC;
+}
+h2 {
+	font-weight : normal;
+}
+.box {
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	border: ridge;
+}
+.titleBox {
+	background-color : #0066CC;
+	color : white;
+	padding: 14px 16px;
+	margin : 0;
+	text-align : center;
+}
+.newsItem {
+	border-top : ridge;
+	color : black;
+	padding: 14px 16px;
+	
+}
+.newsText {
+
+}
+#newsBox {
+	float : left;
+	width : 20%;
+}
+
+#blogBox {
+	float : right;
+	width : 70%;
+	margin : auto;
+}
+

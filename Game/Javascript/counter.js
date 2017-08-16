@@ -1,21 +1,25 @@
 // V0.04 P-Alpha
 /* TDL
- Rewrite HTML, remove annoying navBar, no, the other one at the tippy top that's blue.
+ Rewrite HTML, the other one at the tippy top that's blue.
  If you have no idea who I mean, that means you should remove this message. Or you're colourblind. 
  
  // function from another person
  https://rawgit.com/IvarK/BuildASpaceShip/master/index.html
 
+ FAQ
+ Restart Button
+ Introduction to Game
+ Personal Stats
  Destroy Buildings 
  Longbow men
  Pikemen
  Diplomacy Actions, More Factions.
  Events
  War
- Import/Export
  Trading
  Import/Export(Data)
  Spying?
+ 
  Resources:
 	Ores
 		Gold Ore
@@ -33,13 +37,42 @@
 		Steel
 		Glass
 	Construction
+		
 		Wood
 		Plank
 		Nails
 		Gold Foil
-		Plaster of Paris
-		
-	Replace $$$ with Gold, Silver, Bronze coins
+		Plaster of Paris 
+	Food Seperation + Set as Food Checkbox
+		Meat
+		Vegetables
+		Dairy
+		Bread
+	Entertainment
+	Trade 
+		Carts
+	War
+		Militia
+		Archers
+		Swordman
+		Pikeman
+		Longbowman
+		Light Calvary
+		Man at Arms
+		Knight
+		Crossbowman
+		Halbardier
+		Musketeer
+		Field Canon
+		Reiter
+		Hussar
+	Animals
+		Sheep
+		Pigs
+		Cows
+		Horses (DO THIS ONE FIRST)
+		Goats
+	Replace $$$ with Unique Symbol
 */
 var timeInterval = setInterval(passTime,1000);
 var fpsInterval = setInterval(update,20);
@@ -117,10 +150,11 @@ function passTime () {
 	timeStamp = years.toString() + " y " + days.toString() + " d: ";
 	
 	// Story Books marked on time
-	
-	loadStoryMessage("../Messages/msg1.txt");
-
-	
+	switch (time) {
+		case 1:
+			loadStoryMessage("../Messages/msg1.txt");
+			break;
+	}
 }
 
 function calculateDate (time) {
