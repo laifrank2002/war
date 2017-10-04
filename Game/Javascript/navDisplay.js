@@ -19,6 +19,10 @@ function SettingsTab () {
 	clearAllTabs();
 	document.getElementById("Settings").style.display = "block";
 }
+function AllocationTab () {
+	clearAllTabs();
+	document.getElementById("Allocation").style.display = "block";
+}
 // So I don't have to rewrite this code
 function clearAllTabs () {
 	tabAll(false)
@@ -32,7 +36,7 @@ function showAllTabs () {
 // For Convience's Sake
 function tabAll(display){
 	// All Important Array, for the sake of convienance and not writing 10,000 tab.closes
-	var Ids = ["Economy","Military","Buildings","Diplomacy","Settings"]
+	var Ids = ["Economy","Allocation","Military","Buildings","Diplomacy","Settings"]
 	if (display){ // Open
 		for (i = 0; i < Ids.length; i++){
 			document.getElementById(Ids[i]).style.display = "block";

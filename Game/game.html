@@ -9,8 +9,15 @@
 	<link rel="stylesheet" type="text/css" href="CSS/style.css">
 	<!-- Custom Style -->
 	<link rel="stylesheet" type="text/css" href="CSS/game.css">
-	<!-- numbering script -->
-	<script src="Javascript/counter.js"> </script>
+	<!-- Preloaded Functions -->
+	<script src="Javascript/saveLoad.js"> </script>
+	<script src="Javascript/buildingButton.js"> </script>
+	<script src="Javascript/update.js"> </script>
+	<script src="Javascript/allocate.js"> </script>
+	<script src="Javascript/statCalc.js"> </script>
+	<script src="Javascript/military.js"> </script>
+	<!-- Main script -->
+	<script src="Javascript/main.js"> </script>
 	
 	<!-- Favicons! -->
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -56,6 +63,7 @@
 			<!-- Switching NavBar -->
 			<button type="button" onclick="showAllTabs()">Show All</button>
 			<button type="button" onclick="EconomyTab()">Economy</button>
+			<button type="button" onclick="AllocationTab()">Allocate</button>
 			<button type="button" onclick="MilitaryTab()">Military</button>
 			<button type="button" onclick="BuildingsTab()">Buildings</button>
 			<button type="button" onclick="DiplomacyTab()">Diplomacy</button>
@@ -75,8 +83,26 @@
 				
 			</div>
 			
+			<div class = "infoBox" id="Allocation">
+				<h2>Allocation</h2>
+				<p>Here you can assign your workers!</p>
+				<div class = "infoLine"> <p type = "text" id="farmerDisplay">Farmers</p> 
+					<button type="button" onclick="hireFarmer()" id = "farmerDisplayPlus">+</button>
+					<button type="button" onclick="fireFarmer()" id = "farmerDisplayMinus">-</button></div>
+				<div class = "infoLine"> <p type = "text" id="crafterDisplay">Craftsmen</p> 
+					<button type="button" onclick="hireCrafter()" id = "crafterDisplayPlus">+</button>
+					<button type="button" onclick="fireCrafter()" id = "crafterDisplayMinus">-</button></div>
+				<div class = "infoLine"> <p type = "text" id="taxmanDisplay">Tax Collectors</p> 
+					<button type="button" onclick="hireTaxman()" id = "taxmanDisplayPlus">+</button>
+					<button type="button" onclick="fireTaxman()" id = "taxmanDisplayMinus">-</button></div>
+				<div class = "infoLine"> <p type = "text" id="thinkerDisplay">Philosphers</p> 
+					<button type="button" onclick="hireThinker()" id = "thinkerDisplayPlus">+</button>
+					<button type="button" onclick="fireThinker()" id = "thinkerDisplayMinus">-</button></div>
+			</div>
+			
 			<div class = "infoBox" id="Military">
 				<h2>Military</h2>
+				<p type = "text" id="militaryPowerDisplay"></p>
 				
 				<div class = "infoLine"> <p type = "text" id="militiamenDisplay"></p> 
 					<button type="button" onclick="buyMilitiamen()" id = "militiamenDisplayButton">1pop</button> </div>
