@@ -1,3 +1,5 @@
+
+
 // Dynamic Data
 function update () {
 	// calculations
@@ -18,11 +20,11 @@ function update () {
 	document.getElementById("healthDisplay").innerHTML = health.toFixed(2) + "% is how much healthcare citizens get in your nation!";
 	document.getElementById("happinessDisplay").innerHTML = happiness.toFixed(2) + "% is how happy people are with your regime!";
 	// Allocation
-	document.getElementById("farmerDisplay").innerHTML = "You have " + farmer + " farmers.";
-	document.getElementById("crafterDisplay").innerHTML = "You have " + crafter + " craftesmen.";
-	document.getElementById("taxmanDisplay").innerHTML = "You have " + taxman + " tax collectors.";
-	document.getElementById("thinkerDisplay").innerHTML = "You have " + thinker + " philsophers.";
-	
+	for (i=1;i<workerArray.length;i++){
+		var plural = "";
+		if (workerArray[i].number > 1 || workerArray[i].number == 0) {plural = "s";}
+		document.getElementById(workerArray[i].name + "Display").innerHTML = "You have " + workerArray[i].number + " " + workerArray[i].name + plural;
+	}	
 	// Military
 	document.getElementById("militaryPowerDisplay").innerHTML = attack + " ATTK " + defense + " DEFS";
 	

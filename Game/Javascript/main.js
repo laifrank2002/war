@@ -9,7 +9,6 @@
  FAQ
  Restart Button
  Introduction to Game
- Personal Stats
  Destroy Buildings 
  Longbow men
  Pikemen
@@ -53,9 +52,6 @@
 	Trade 
 		Carts
 	War
-		Militia
-		Archers
-		Swordman
 		Pikeman
 		Longbowman
 		Light Calvary
@@ -169,7 +165,7 @@ function makeResources (){
 function calculateMoney () {
 	
 	addedmoney = 0;
-	addedmoney += pop * 0.01 * (taxman + 1);
+	addedmoney += pop * 0.01 * (workerArray[3].number + 1);
 	
 	addedmoney = roundTwo(addedmoney);
 	// boosts
@@ -183,7 +179,7 @@ function calculateFood () {
 	addedfood -= (1 * pop);
 	// production
 	addedfood += (1.5 * farms);
-	addedfood += (2 * farmer);
+	addedfood += (2 * workerArray[1].number);
 	
 	if (well) {
 		addedfood *= 1.5;
@@ -263,75 +259,7 @@ function loadStoryMessage(messageName){
 	xhttp.send();
 }
 
-// Saves, in Cookie form!
-function SaveData () {
-	// Convinience
-	var toSavedData = ["0.04",time,money,food,pop,territory,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost];
-	
-	set_cookie("save",toSavedData);
-	TextboxSave("ftpTextbox",toSavedData);
-	
-	pushMessage("Saved!");
-	
-}
 
-// Saves Data, in Local Storage Object form! It's slightly less tasty.
-function SaveLocalData () {
-	// Convinience
-	var toSavedData = ["0.04",time,money,food,pop,territory,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost,farmer,crafter,taxman,thinker];
-	if(typeof(Storage) !== "undefined"){
-		Set_LocalStorage("SmallWarSave",toSavedData);
-		pushMessage("Saved sucessfully");
-	} else {
-		pushMessage("Not saved sucessfully, unable to access local web storage.");
-	}
-	
-}
-// Loads Data, in Cookie form!
-function LoadData () {
-	var save_data = get_cookie('save');	
-	LoadIntoProgram(save_data)
-}
-// Loads Local Data
-function LoadLocalData() {
-	var save_data = Get_LocalStorage("SmallWarSave");
-	LoadIntoProgram(save_data);
-	pushMessage("Loaded!")
-}
-// TXT Backup
-function TextboxSave (Id,Value){
-	document.getElementById(Id).value = btoa(Value);
-}
-function TextboxLoad (Id){
-	return atob(document.getElementById(Id).value)
-}
-
-function LoadIntoProgram(save_data){
-	
-	var defs_data = ["0.04",0,75,0,0,15,0,0,0,false,0,false,0,0,false,0,0,0,0];
-
-	if (!save_data) {return};
-	var resultData = save_data;
-	
-	time = resultData[1];
-	money = resultData[2];
-	food = resultData[3];
-	pop = resultData[4];
-	territory = resultData[5];
-	militiamen = resultData[6];
-	swordmen = resultData[7];
-	archers = resultData[8];
-	barrack = resultData[9];
-	farms = resultData[10];
-	well = resultData[11];
-	house = resultData[12];
-	barn = resultData[13];
-	outpost = resultData[14];
-	farmer = resultData[15];
-	crafter = resultData[16];
-	taxman = resultData[17];
-	thinker = resultData[18];
-}
 function autoSave(){
 	SaveData();
 	LoadData();

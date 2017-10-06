@@ -7,6 +7,10 @@ function MilitaryTab () {
 	clearAllTabs();
 	document.getElementById("Military").style.display = "block";
 }
+function ExpeditionsTab () {
+	clearAllTabs();
+	document.getElementById("Expeditions").style.display = "block";
+}
 function BuildingsTab () {
 	clearAllTabs();
 	document.getElementById("Buildings").style.display = "block";
@@ -35,8 +39,8 @@ function showAllTabs () {
 }
 // For Convience's Sake
 function tabAll(display){
-	// All Important Array, for the sake of convienance and not writing 10,000 tab.closes
-	var Ids = ["Economy","Allocation","Military","Buildings","Diplomacy","Settings"]
+	// Array containing Ids, add here to add more Infoboxes
+	var Ids = ["Economy","Allocation","Military","Expeditions","Buildings","Diplomacy","Settings"]
 	if (display){ // Open
 		for (i = 0; i < Ids.length; i++){
 			document.getElementById(Ids[i]).style.display = "block";

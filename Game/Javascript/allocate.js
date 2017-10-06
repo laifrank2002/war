@@ -1,15 +1,40 @@
+// constructor for a type of worker
+function worker(workerName,num,maximum){
+	this.name = workerName;
+	this.number = num;
+	this.max = maximum;
+}
 // Employment
-var farmer = 0;
-var crafter = 0;
-var taxman = 0;
-var thinker = 0;
+var workerArray = [];
+
+//
+
+workerArray[1] = new worker("farmer",0,0);
+workerArray[2] = new worker("crafter",0,0);
+workerArray[3] = new worker("tax collector",0,1);
+workerArray[4] = new worker("thinker",0,1);
+
 
 var employed = 0;
 // Button Vars
 function calcEmployment (){
-	employed = farmer + crafter + taxman + thinker
+	employed = 0;
+	for (i=1;i<workerArray.length;i++){
+		employed += workerArray[i].number;
+	}
 }
 
+function hireWorker (arrayIndex){
+	calcEmployment();
+	if (employed + 1 <= pop){
+		workerArray[arrayIndex].number += 1;
+	}
+}
+function fireWorker (arrayIndex){
+	if (workerArray[arrayIndex].number - 1 >= 0){
+		workerArray[arrayIndex].number -= 1;
+	}
+}
 // Hire/Fires
 function hireFarmer() {
 	calcEmployment();

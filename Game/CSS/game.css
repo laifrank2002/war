@@ -1,11 +1,11 @@
 /* Gives the Web Page a Gothic Taste*/
 body {
-	font-family : monospace,"Times New Roman",serif;
+	font-family : "Tangerine","Courier New",monospace;
 	background-image : url("../Images/background.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center; /* center the image */
-
+	font-size: 2em;
 }
 .content {
 	top : 0px;
@@ -42,7 +42,7 @@ body {
 	width : 200px;
 	
 }
-/* Don't take up too much space for messages, scrolling is cool */
+/* Adds scrolling features for tiny message-box */
 #Messages {
 	height : 280px; /* No everlong trail */
 	overflow : scroll; /* Scrollbars */
@@ -95,6 +95,8 @@ button {
 	font-weight : bold;
 	font-family : inherit;
 	background-color: Transparent; /* The colour of the Button is nothing */
+	font-size: inherit;
+	color : black;
 }
 
 button:hover {
@@ -104,7 +106,10 @@ button:hover {
 textarea {
     resize: none;
 }
-/* Custom h3 formatting for the diplomacy tab */
-.infoLine h3{
+/* Custom formatting for the diplomacy tab */
+#Diplomacy h3{
 	font-weight : normal;
+}
+#Diplomacy {
+	font-family : "Tangerine","Garamond","Times New Roman",serif;
 }
