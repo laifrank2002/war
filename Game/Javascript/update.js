@@ -23,7 +23,7 @@ function update () {
 	for (i=1;i<workerArray.length;i++){
 		var plural = "";
 		if (workerArray[i].number > 1 || workerArray[i].number == 0) {plural = "s";}
-		document.getElementById(workerArray[i].name + "Display").innerHTML = "You have " + workerArray[i].number + " " + workerArray[i].name + plural;
+		document.getElementById(workerArray[i].name + "Display").innerHTML = "You have " + workerArray[i].number + " " + workerArray[i].displayName + plural;
 	}	
 	// Military
 	document.getElementById("militaryPowerDisplay").innerHTML = attack + " ATTK " + defense + " DEFS";

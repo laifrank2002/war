@@ -35,7 +35,6 @@ function clearAllTabs () {
 
 function showAllTabs () {
 	tabAll(true)
-
 }
 // For Convience's Sake
 function tabAll(display){

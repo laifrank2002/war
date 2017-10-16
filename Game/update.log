@@ -1,13 +1,15 @@
-V0.05 P-Alpha
+V0.06 P-Alpha
 
-10/3/2017
+10/3/2017 0.03
 Started Update Log
 Seperated counter.js into separate files, renamed counter to main.js
 Added workers
 Added Attack Defense Vars
 
-10/6/2017
+10/6/2017 0.04
 Revamped workers
 Added expeditions
 
-
+10/15/2017 0.05
+Updated expeditions
+Started buildings overhaul

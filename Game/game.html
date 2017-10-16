@@ -55,7 +55,11 @@
 			
 			<div class = "infoBox" id="Messages">
 				<h2>Messages</h2>
-				<p id="intro"> </p>
+				<div id="messager">
+					<p id="messageIntro">Here are thy messages!</p>
+					<!-- Appended Messages -->
+				</div>
+				<button type="button" onclick="clearMessages()">Clear All</button>
 			</div>
 		</div>
 		<!-- Main Element -->
@@ -123,32 +127,23 @@
 			</div>
 			<div class = "infoBox" id="Expeditions">
 				<h2>Expeditions</h2>
-				<p type = "text">Here, acquire territory, and fight the barbarians!</p>
+				<p type = "text">Here, go on expeditions and maybe return with something!</p>
+				<p type = "text" id="expeditionsBox"></p>
+				<button type="button" onclick="generateEncounter()" id="encounterButton">Explore!</button>
+				<button type="button" onclick="attackEncounter()" id="attackEncounter">Attack!</button>
+
 			</div>
 			<div class = "infoBox" id="Buildings">
 				<h2>Buildings</h2>
+				<p>Here, build things that will make your citizens happy and you rich. At least in theory, anyways.</p>
 				
-				<div class = "infoLine"> 
-					<p type = "text" id="barrackDisplay">The Barrack Is Not Built</p> 
-					<div class="tooltip">
-						<button type="button" onclick="buyBarrack()" id="barrackDisplayButton">Build</button> 
-						<span class="tooltiptext"> Allows you to hire swordsmen and archers! Costs $100 and takes up 2 territory.</span>
-					</div>
-				</div>
+				<h3>Buildings</h3>
 				
 				<div class = "infoLine"> 
 					<p type = "text" id="farmsDisplay"></p> 
 					<div class="tooltip">
 						<button type="button" onclick="buyFarms()">Build</button> 
 						<span class="tooltiptext"> Produces 1.5 food each, you'll need it to feed your populace! Costs $10 and 1 territory.</span>
-					</div>
-				</div>
-					
-				<div class = "infoLine"> 
-					<p type = "text" id="wellDisplay"></p> 
-					<div class="tooltip">
-						<button type="button" onclick="buyWell()" id="wellDisplayButton">Build</button> 
-						<span class="tooltiptext"> Enhances your food production by 50%! Also, provides water. Costs $50 and 1 territory.</span>
 					</div>
 				</div>
 				
@@ -168,11 +163,29 @@
 					</div>
 				</div>
 				
+				<h3>Projects</h3>
+				
+				<div class = "infoLine"> 
+					<p type = "text" id="barrackDisplay"></p> 
+					<div class="tooltip">
+						<button type="button" onclick="buyBarrack()" id="barrackDisplayButton">Build</button> 
+						<span class="tooltiptext"> Allows you to hire swordsmen and archers! Costs $100 and takes up 2 territory.</span>
+					</div>
+				</div>
+				
 				<div class = "infoLine"> 
 					<p type = "text" id="outpostDisplay"></p> 
 					<div class="tooltip">
 						<button type="button" onclick="buyOutpost()" id ="outpostDisplayButton">Build</button> 
 						<span class="tooltiptext"> Helps house and train better soldiers like pikemen and longbow men. Costs $250 and 3 territory.</span>
+					</div>
+				</div>
+				
+				<div class = "infoLine"> 
+					<p type = "text" id="wellDisplay"></p> 
+					<div class="tooltip">
+						<button type="button" onclick="buyWell()" id="wellDisplayButton">Build</button> 
+						<span class="tooltiptext"> Enhances your food production by 50%! Also, provides water. Costs $50 and 1 territory.</span>
 					</div>
 				</div>
 				
@@ -183,8 +196,6 @@
 						<span class="tooltiptext"></span>
 					</div>
 				</div>
-					
-				<p>in your kingdom</p>
 			</div>
 			<div class = "infoBox" id="Diplomacy">
 				<h2>Diplomacy</h2>
@@ -357,9 +368,10 @@
 					<!-- Resolve this mess later -->
 					<button type="button" onclick="SaveLocalData()">Save to Local</button>
 					<button type="button" onclick="LoadLocalData()">Load from Local</button>
+					<button type="button" onclick="resetGame()">Reset</button>
 				</div>
 				<p>Created by Francis Valeria(Frank Lai), 2017, with a lot of trial, error, and frustration.</p>
-				<p>This is the v 0.004 Pre-Alpha </p> <a href="update.log" target="_blank">Update Log</a>
+				<p>This is the v 0.005 Pre-Alpha </p> <a href="update.log" target="_blank">Update Log</a>
 				<a href="../index.html" target="_blank">Back to me</a>
 				<a href="https://www.surveymonkey.com/r/FHJ5HZ9" target="_blank">Tell me what you think!</a>
 			</div>
@@ -367,7 +379,7 @@
 		</div>
 		
 		<script src="Javascript/navDisplay.js"> </script><!-- So the switcheroo will work, loading uncluttered script -->
-
+		<script src="Javascript/init.js"> </script><!-- Init that requires all the other stuff to be already present -->
 	</div>
 	
 </body>

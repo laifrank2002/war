@@ -10,8 +10,7 @@
  Restart Button
  Introduction to Game
  Destroy Buildings 
- Longbow men
- Pikemen
+
  Diplomacy Actions, More Factions.
  Events
  War
@@ -38,7 +37,9 @@
 	Construction
 		
 		Wood
+		Stone
 		Plank
+		Brick
 		Nails
 		Gold Foil
 		Plaster of Paris 
@@ -52,17 +53,7 @@
 	Trade 
 		Carts
 	War
-		Pikeman
-		Longbowman
-		Light Calvary
-		Man at Arms
-		Knight
-		Crossbowman
-		Halbardier
-		Musketeer
-		Field Canon
-		Reiter
-		Hussar
+
 */
 var timeInterval = setInterval(passTime,1000);
 var fpsInterval = setInterval(update,20);
@@ -108,8 +99,7 @@ var messages = 0;
 var timeStamp = "";
 
 // Initial
-LoadData();
-alert("This game requires cookies to run. The manual saving system isn't implemented yet, so wait a while")
+
 
 // Floating Point Error Resolver
 function roundTwo (value){
@@ -236,8 +226,8 @@ function pushMessage (messageText) {
 	var messageContents = document.createTextNode(timeStamp + messageText);
 	messageNode.appendChild(messageContents)
 	
-	var element = document.getElementById("Messages")
-	var child = document.getElementById("intro")
+	var element = document.getElementById("messager")
+	var child = document.getElementById("messageIntro")
 	
 	element.appendChild(messageNode);
 	
@@ -245,7 +235,9 @@ function pushMessage (messageText) {
 	document.getElementById("Messages").scrollTop += 500;
 	messages += 1
 }
-
+function clearMessages (){
+	document.getElementById("messager").innerHTML = "";
+}
 // Loads Other Messages
 function loadStoryMessage(messageName){
 	var xhttp = new XMLHttpRequest();
@@ -261,8 +253,8 @@ function loadStoryMessage(messageName){
 
 
 function autoSave(){
-	SaveData();
-	LoadData();
+	SaveLocalData();
+	LoadLocalData();
 }
 
 function setAutoSave(delay){

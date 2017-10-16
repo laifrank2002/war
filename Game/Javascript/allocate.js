@@ -1,6 +1,7 @@
 // constructor for a type of worker
-function worker(workerName,num,maximum){
+function worker(workerName,realName,num,maximum){
 	this.name = workerName;
+	this.displayName = realName;
 	this.number = num;
 	this.max = maximum;
 }
@@ -9,10 +10,10 @@ var workerArray = [];
 
 //
 
-workerArray[1] = new worker("farmer",0,0);
-workerArray[2] = new worker("crafter",0,0);
-workerArray[3] = new worker("tax collector",0,1);
-workerArray[4] = new worker("thinker",0,1);
+workerArray[1] = new worker("farmer","Farmer",0,0);
+workerArray[2] = new worker("crafter","Craftsman",0,0);
+workerArray[3] = new worker("tax collector","Tax Collector",0,1);
+workerArray[4] = new worker("thinker","Philosopher",0,1);
 
 
 var employed = 0;
