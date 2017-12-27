@@ -5,9 +5,36 @@ var safety = 0;
 var health = 0;
 var happiness = 0;
 
+var hours = 0;
+var days = 0;
+var years = 0;
+var season = "Spring";
+var month = "Janurary";
+
 function calculateDate (time) {
-	years = Math.floor(time/365);
-	days = time % 365;
+	// YY/MM/DD//HH
+	years = Math.floor(time/8760);
+	days = Math.floor((time% 8760) / 24) ;
+	month = dayToMonth(days);
+	hours = Math.floor(time%24);
+	
+	
+	// Calculates Seasons
+	if (days <= 30 || days > 300){
+		season = "Winter";
+	}
+	else if(days > 30 && days <=120){
+		season = "Spring";
+	}
+	else if(days > 120 && days <= 210){
+		season = "Summer";
+	}
+	else if(days > 210 && days <= 300){
+		season = "Autumn";
+	}
+	else {
+		season = "Spring";
+	}
 }
 
 function calculateUnemployment (employment,population) {
@@ -21,7 +48,7 @@ function calculateUnemployment (employment,population) {
 function calculateStatistics() { // Meaningless stats
 	
 	calculateUnemployment (employed,pop);
-	GDP = addedmoney * 365;
+	GDP = addedmoney * 8760;
 	GDP = roundTwo(GDP);
 	
 	// Statistics

@@ -10,6 +10,9 @@ function SaveLocalData () {
 	if(typeof(Storage) !== "undefined"){
 		Set_LocalStorage("SmallWarSave",toSavedData);
 		Set_LocalStorage("SmallWarWorkers",workerArray);
+		Set_LocalStorage("SmallWarBuildings",buildingArray);
+		Set_LocalStorage("SmallWarProjects",projectArray);
+		Set_LocalStorage("SmallWarSoldiers",soldierArray);
 		pushMessage("Saved sucessfully");
 	} else {
 		pushMessage("Not saved sucessfully, unable to access local web storage.");
@@ -46,6 +49,7 @@ function resetGame() {
 function LoadLocalData() {
 	var save_data = Get_LocalStorage("SmallWarSave");
 	var worker_save_data = Get_LocalStorage("SmallWarWorkers");
+	var building_save_data = Get_LocalStorage("SmallWarBuildings");
 	
 	if (!save_data) {return};
 	
@@ -66,9 +70,19 @@ function LoadLocalData() {
 	barn = resultData[13];
 	outpost = resultData[14];
 	usedTerritory = resultData[15];
+	
+	if (!worker_save_data) {return};
+	
 	// Worker Array
 	for (i=1;i<worker_save_data.length;i++){
 		workerArray[i].num = worker_save_data[i].num;
+	}
+	
+	if (!building_save_data) {return};
+	
+	// Building Array
+	for (i=1;i<building_save_data.length;i++){
+		buildingArray[i] = building_save_data[i];
 	}
 	//
 	if (initTrue){

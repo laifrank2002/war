@@ -1,3 +1,20 @@
+/*
+// Farm Fields Allocation System
+	field entity
+	1 field = 1 territory
+	ranks
+		garden = 1 - 9 field
+		farm = 10 - 99 fields, enable livestock 
+		estate = 100+ fields, enable servants and administration upgrades
+	every field requires 1 or more farmers
+	formula:
+	foodOutput = farmers + fields
+	
+	fields to allocation
+	0 to grain ...
+	0 to barley ...
+	0 to vegetables ...
+*/
 // constructor for a type of worker
 function worker(workerName,realName,num,maximum){
 	this.name = workerName;
@@ -5,24 +22,25 @@ function worker(workerName,realName,num,maximum){
 	this.number = num;
 	this.max = maximum;
 }
-// Employment
+// Data Storage
 var workerArray = [];
-
-//
+var fieldsArray = [0,0,0];
+// Assignment/Init
 
 workerArray[1] = new worker("farmer","Farmer",0,0);
 workerArray[2] = new worker("crafter","Craftsman",0,0);
 workerArray[3] = new worker("tax collector","Tax Collector",0,1);
 workerArray[4] = new worker("thinker","Philosopher",0,1);
 
-
 var employed = 0;
+var fieldsUsed = 0;
 // Button Vars
 function calcEmployment (){
-	employed = 0;
+	var new_employed = 0;
 	for (i=1;i<workerArray.length;i++){
-		employed += workerArray[i].number;
+		new_employed += workerArray[i].number;
 	}
+	employed = new_employed;
 }
 
 function hireWorker (arrayIndex){
@@ -36,51 +54,24 @@ function fireWorker (arrayIndex){
 		workerArray[arrayIndex].number -= 1;
 	}
 }
-// Hire/Fires
-function hireFarmer() {
-	calcEmployment();
-	if (employed + 1 <= pop){
-		farmer += 1;
-	}
-}
-function fireFarmer() {
-	if (farmer - 1 >= 0){
-		farmer -= 1;
-	}
-}
 
-function hireCrafter () {
-	calcEmployment();
-	if (employed + 1 <= pop){
-		crafter += 1;
+// Fields
+function calcFieldUsage (){
+	var new_fieldsUsed = 0;
+	for (i=0;i<fieldsArray.length;i++){
+		new_fieldsUsed += fieldsArray[i];
+	}
+	fieldsUsed = new_fieldsUsed;
+}
+function assignField (arrayIndex){
+	calcFieldUsage();
+	if (fieldsUsed + 1 <= farm){
+		fieldsArray[arrayIndex] += 1;
 	}
 }
-function fireCrafter () {
-	if (crafter - 1 >= 0){
-		crafter -= 1;
-	}
-}
-
-function hireTaxman () {
-	calcEmployment();
-	if (employed + 1 <= pop){
-		taxman += 1;
-	}
-}
-function fireTaxman () {
-	if (taxman - 1 >= 0){
-		taxman -= 1;
-	}
-}
-
-function hireThinker () {
-	calcEmployment();
-	if (employed + 1 <= pop){
-		thinker += 1;
-	}
-}
-function fireThinker () {
-	if (thinker - 1 >= 0){
-		thinker -= 1;
+function unassignField (arrayIndex){
+	calcFieldUsage();
+	if (fieldsUsed - 1 >= 0){
+		fieldsArray[arrayIndex] -= 1;
 	}
 }

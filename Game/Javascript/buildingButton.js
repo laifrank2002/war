@@ -1,62 +1,77 @@
 // Constructors
-function building(buildingName,realName,num,cost,territory){
+function building(buildingName,realName,num,cost,territory,isDisplayed){
 	this.name = buildingName;
 	this.displayName = realName;
 	this.number = num;
 	this.money = cost;
 	this.land = territory;
+	this.display = isDisplayed;
 }
-function project(projectName,realName,cost,territory){
+function project(projectName,realName,cost,territory,isDisplayed){
 	this.name = projectName;
 	this.displayName = realName;
 	this.built = false;
 	this.money = cost;
 	this.land = territory;
+	this.display = isDisplayed;
 }
-function soldier(soldierName,realName,num,attackPower,defensePower,cost){
+function soldier(soldierName,realName,num,attackPower,defensePower,cost,isDisplayed){
 	this.name = soldierName;
 	this.displayName = realName;
 	this.number = num;
 	this.attack = attackPower;
 	this.defense = defensePower;
 	this.money = cost;
-	this.pop = pop;
+	this.display = isDisplayed;
 }
 
 // numbered building arrays 
 var buildingArray = [];
 
-buildingArray[1] = new building("farm","Farm",0,10,1);
-buildingArray[2] = new building("house","House",0,75,1);
-buildingArray[3] = new building("barn","Barn",0,100,1);
+buildingArray[1] = new building("farm","Farm",0,10,1,true);
+buildingArray[2] = new building("house","House",0,75,1,true);
+buildingArray[3] = new building("barn","Barn",0,100,1,true);
 
 // one off building arrays, ie projects
 var projectArray = [];
 
-projectArray[1] = new project("barrack","Barrack",100,2);
-projectArray[2] = new project("well","Well",50,1);
-projectArray[3] = new project("outpost","Outpost",250,3);
+projectArray[1] = new project("barrack","Barracks",100,2,true);
+projectArray[2] = new project("well","Well",50,1,false);
+projectArray[3] = new project("outpost","Outpost",250,2,false);
+projectArray[4] = new project("stable","Stables",500,2,false);
+projectArray[5] = new project("armory","Armory",500,1,false);
+projectArray[6] = new project("keep","Keep",1000,3,false);
+projectArray[7] = new project("range","Archery Range",500,4,false);
+projectArray[8] = new project("smallarms","Small Arms Shop",1000,1,false);
+projectArray[9] = new project("artillery","Artillery Foundary",1500,3,false);
+projectArray[10] = new project("academy","Military Academy",2000,2,false);
 
 // Soldiers Array
 var soldierArray = [];
 
-soldierArray[1] = new soldier("peasant","Peasant",0,1,0,0);
-soldierArray[2] = new soldier("swordsman","Swordsman",0,1,1,10);
-soldierArray[3] = new soldier("archer","Archer",0,1,1,10);
-soldierArray[4] = new soldier("pikeman","Pikeman",0,3,4,20);
-soldierArray[5] = new soldier("longbowman","Longbowman",0,5,2,25);
-soldierArray[6] = new soldier("horseman","Light Calvary",0,10,3,30);
-soldierArray[7] = new soldier("manatarms","Man at Arms",0,5,10,25);
-soldierArray[8] = new soldier("knight","Knight",0,20,5,50);
-soldierArray[9] = new soldier("crossbowman","Crossbowman",0,10,1,50);
-soldierArray[10] = new soldier("halbardier","Halbardier",0,3,10,75);
-soldierArray[11] = new soldier("musketeer","Musketeer",0,15,1,75);
-soldierArray[12] = new soldier("fieldgun","Field Gun",0,100,5,250);
-soldierArray[13] = new soldier("reiter","Reiter",0,10,25,125);
-soldierArray[14] = new soldier("hussar","Hussar",0,15,10,100);
+soldierArray[1] = new soldier("peasant","Peasant",0,1,0,0,true);
+soldierArray[2] = new soldier("swordsman","Swordsman",0,1,1,10,false);
+soldierArray[3] = new soldier("archer","Archer",0,1,1,10,false);
+soldierArray[4] = new soldier("pikeman","Pikeman",0,3,4,20,false);
+soldierArray[5] = new soldier("longbowman","Longbowman",0,5,2,25,false);
+soldierArray[6] = new soldier("horseman","Light Calvary",0,10,3,30,false);
+soldierArray[7] = new soldier("manatarms","Man at Arms",0,5,10,25,false);
+soldierArray[8] = new soldier("knight","Knight",0,20,5,50,false);
+soldierArray[9] = new soldier("crossbowman","Crossbowman",0,10,1,50,false);
+soldierArray[10] = new soldier("halbardier","Halbardier",0,3,10,75,false);
+soldierArray[11] = new soldier("musketeer","Musketeer",0,15,1,75,false);
+soldierArray[12] = new soldier("fieldgun","Field Gun",0,100,5,250,false);
+soldierArray[13] = new soldier("reiter","Reiter",0,10,25,125,false);
+soldierArray[14] = new soldier("hussar","Hussar",0,15,10,100,false);
+soldierArray[15] = new soldier("guardsman","Guardsman",0,15,10,150,false);
 
 // Purchasing Functions
 
+
+// Condensed Building Function
+function buyBuilding(arrayIndex) {
+	
+}
 // This is so the buttons would work
 function buyMilitiamen() {
 	if (pop >= 1){
@@ -112,7 +127,7 @@ function buyBarrack () {
 function buyFarms () {
 	if (money >= 10 && usedTerritory + 1 <= territory) {
 		money -= 10;
-		farms += 1;
+		buildingArray[1].number += 1;
 		usedTerritory += 1;
 
 		money=roundTwo(money);
@@ -140,7 +155,7 @@ function buyWell () {
 function buyHouse() {
 	if (money >= 75 && usedTerritory + 1 <= territory) {
 		money -= 75;
-		house += 1;
+		buildingArray[2].number += 1;
 		usedTerritory += 1;
 
 		money=roundTwo(money);
@@ -153,7 +168,7 @@ function buyHouse() {
 function buyBarn() {
 	if (money >= 100 && usedTerritory + 1 <= territory) {
 		money -= 100;
-		barn += 1;
+		buildingArray[3].number += 1;
 		usedTerritory += 1;
 		
 		money=roundTwo(money);

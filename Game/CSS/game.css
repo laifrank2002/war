@@ -1,3 +1,13 @@
+/* CSS Reset */
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
 /* Gives the Web Page a Gothic Taste*/
 body {
 	font-family : "Tangerine","Courier New",monospace;
@@ -6,32 +16,57 @@ body {
 	background-repeat: no-repeat;
 	background-position: center center; /* center the image */
 	font-size: 2em;
+
+}
+/* Custom after reset */
+h1 {
+	font-size : 2em;
+}
+textarea {
+	font-family : monospace;
+	font-size : 12px;
 }
 .content {
-	top : 0px;
+
 }
+.headliner {
+	margin-bottom : 5px;
+	background-color: white;
+	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper with shodows */
+	padding : 5px;
+	background-image : url("../Images/paper6.jpg"); /* Background papery texture */
+}
+
 /* 
  This is so each distinct box is distinct.
 */
 .info {
 	background-color : white; /* So that the player can see the content*/
 	padding : 5px;
-	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
+	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper with shodows */
 	width : 600px;
-	margin : 0 0 0 10px;
+	margin : 0 10px 0 10px;
 	float : left;
 	
 	height : 580px; /* No everlong trail */
 	overflow : scroll; /* Scrollbars */
 	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */
+	background-image : url("../Images/paper6.jpg"); /* Background papery texture */
 	
 }
 .infoBox {
 	padding : 3px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	background-color : white; /* So that the player can see the content*/
+	background-image : url("../Images/paper6.jpg"); /* Background papery texture */
+
 }
 .infoLine p {
 	display : inline-block;
+}
+.infoLine button{
+	float : right;
+	margin-right : 5px;
 }
 /* Resource Info Box*/
 .overview {
@@ -39,15 +74,22 @@ body {
 	background-color : white; /* So that the player can see the content*/
 	padding : 5px;
 	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
-	width : 200px;
+	width : 300px;
+	background-image : url("../Images/paper6.jpg"); /* Background papery texture */
 	
 }
 /* Adds scrolling features for tiny message-box */
 #Messages {
-	height : 280px; /* No everlong trail */
+	height : 580px; /* No everlong trail */
+	width : 300px; /* Constant Width */
+	float : left;
 	overflow : scroll; /* Scrollbars */
 	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */
-
+}
+#Messager {
+	height : 580px; /* No everlong trail */
+	width : 300px; /* Constant Width */
+	
 }
 /* So tooltips show up and stay down when it needs to be */
 .tooltip {
@@ -88,14 +130,14 @@ body {
  So buttons look nice
 */
 button {
-	text-decoration : underline;
 	text-align : center;
 	border : none;
-	outline:none;
-	font-weight : bold;
-	font-family : inherit;
+	outline: none;
+	text-decoration : underline;
+	font-family : "Times New Roman", serif;
+	/*font-weight : bold;*/
 	background-color: Transparent; /* The colour of the Button is nothing */
-	font-size: inherit;
+	font-size: 15px;
 	color : black;
 }
 

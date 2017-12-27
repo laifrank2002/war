@@ -1,10 +1,6 @@
 // V0.04 P-Alpha
 /* TDL
  Rewrite HTML, the other one at the tippy top that's blue.
- If you have no idea who I mean, that means you should remove this message. Or you're colourblind. 
- 
- // function from another person
- https://rawgit.com/IvarK/BuildASpaceShip/master/index.html
 
  FAQ
  Restart Button
@@ -18,46 +14,25 @@
  Import/Export(Data)
  Spying?
  
- Resources:
-	Ores
-		Gold Ore
-		Iron Ore 
-		Bronze Ore
-		Silver Ore
-		Coal
-		Charcoal
-		Sand
-	Bars
-		Iron
-		Bronze
-		Gold
-		Silver
-		Steel
-		Glass
-	Construction
-		
-		Wood
-		Stone
-		Plank
-		Brick
-		Nails
-		Gold Foil
-		Plaster of Paris 
-	Food Seperation + Set as Food Checkbox
-		Meat
-		Vegetables
-		Dairy
-		Bread
-	Entertainment
+ Entertainment
 	
 	Trade 
 		Carts
 	War
-
+	Classes
+		Serfs 1.0 (Default)
+		Peasants 1.5 (Needs Territory, Produces Food Too)
+		Working Class 2.5 (Needs City Territory, Produces Goods)
+		Middle Class 5.0 (Needs City Territory and Goods, Produces Knowledge)
+		Merchants 7.5 (Needs City Territory and Licenses and more Goods, provides Trading Services)
+		Patricians 10.0 (Needs Goods, Exotic Goods, City Territory and Estates, Produces Knowledge)
+		Aristocrat 50.0 (Needs Goods, Exotic Goods, City Territory, Territory, and Estates, and Produces Knowledge and Taxes) 
+			(Creates a Manor with 1 Patrician, Serfs, and lots of Territory and Slaves)
+		
+		Slaves 0 (Needed for Aristocrats, is just cheap labour) (Can turn into Serfs)
+		Nationals 0.5 (People not under direct jurisdiction, produces a little tax money) (Can turn into Peasants)
 */
-var timeInterval = setInterval(passTime,1000);
-var fpsInterval = setInterval(update,20);
-var saveInterval = setInterval(autoSave,30000);
+
 //init
 // Player Stats
 var time = 0;
@@ -68,9 +43,6 @@ var food = 0;
 var territory = 15;
 var usedTerritory = 0; 
 // Economy
-var days = 0;
-var years = 0;
-
 var addedmoney = 0.01;
 
 var maxpop = 10;
@@ -107,11 +79,11 @@ function roundTwo (value){
 }
 
 function passTime () {
-	time = time + 1;	
+	time = time + 1;
 	// Time, the healer, updates values!
 	makeResources();
 	// Updates Timestamp
-	timeStamp = years.toString() + " y " + days.toString() + " d: ";
+	timeStamp = years.toString() + " y " + days.toString() + " d " + ":";
 	
 }
 
@@ -165,21 +137,24 @@ function calculateMoney () {
 
 function calculateFood () {
 	addedfood = 0;
-	// consumption
-	addedfood -= (1 * pop);
+	
 	// production
-	addedfood += (1.5 * farms);
+	addedfood += (1.5 * buildingArray[1].number);
 	addedfood += (2 * workerArray[1].number);
 	
 	if (well) {
 		addedfood *= 1.5;
 	}
+	
+	// consumption
+	addedfood -= (1 * pop);
+	
 	// max food
 	
 	
 	maxfood = 100;
 	
-	maxfood += (500 * barn);
+	maxfood += (500 * buildingArray[3].number);
 	
 }
 
@@ -195,7 +170,7 @@ function calculatePop () {
 	
 	maxpop = 10;
 	
-	maxpop += (5 * house);
+	maxpop += (5 * buildingArray[2].number);
 }
 
 // Button Functions

@@ -1,15 +1,31 @@
 V0.06 P-Alpha
 
+
+12/27/2017 0.063
+Revamped overview table, made it a table, built some functions to handle it.
+
+12/16/2017 0.062
+Bodged some numbers to look nicer, in pairs of 3s.
+
+10/24/2017 0.061
+Finished date overhaul
+
+10/23/2017 0.06
+Continued buildings overhaul
+Started date overhaul
+Redid some CSS, looks nicer
+
+10/15/2017 0.05
+Updated expeditions
+Started buildings overhaul
+
+10/6/2017 0.04
+Revamped workers
+Added expeditions
+
 10/3/2017 0.03
 Started Update Log
 Seperated counter.js into separate files, renamed counter to main.js
 Added workers
 Added Attack Defense Vars
 
-10/6/2017 0.04
-Revamped workers
-Added expeditions
-
-10/15/2017 0.05
-Updated expeditions
-Started buildings overhaul

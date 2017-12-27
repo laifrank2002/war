@@ -27,6 +27,10 @@ function AllocationTab () {
 	clearAllTabs();
 	document.getElementById("Allocation").style.display = "block";
 }
+function FAQTab () {
+	clearAllTabs();
+	document.getElementById("FAQ").style.display = "block";
+}
 // So I don't have to rewrite this code
 function clearAllTabs () {
 	tabAll(false)
@@ -39,7 +43,7 @@ function showAllTabs () {
 // For Convience's Sake
 function tabAll(display){
 	// Array containing Ids, add here to add more Infoboxes
-	var Ids = ["Economy","Allocation","Military","Expeditions","Buildings","Diplomacy","Settings"]
+	var Ids = ["Economy","Allocation","Military","Expeditions","Buildings","Diplomacy","Settings","FAQ"]
 	if (display){ // Open
 		for (i = 0; i < Ids.length; i++){
 			document.getElementById(Ids[i]).style.display = "block";

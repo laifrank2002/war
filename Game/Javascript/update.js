@@ -1,18 +1,46 @@
+// Note, abbr is bodged. Standardize for all numbers abbr. Must Fix added and really small numbers.
+var overviewTable = document.getElementById("overviewTable");
+var notationSetting = 3;
 
+// Quick shortcut function to add commas to numbers and or shorten them
+function abbr (number){
+	return numToReadable(notationSetting,number);
+}
 
+// Quick inserts table row
+function insertTableRow (table,changetext){
+	var dataTable = document.getElementById(table);
+    var dataRow = dataTable.insertRow(document.getElementById(table).rows.length);
+
+    for (i=0;i<changetext.length;i++){
+    	var dataCell = dataRow.insertCell(i)
+        dataCell.innerHTML = changetext[i]
+        
+    }
+}
+// Quickly change a row of a table
+function changeTableRow(table,row,changetext){
+	for (i=0;i<changetext.length;i++){
+		document.getElementById(table).rows[row].cells[i].innerHTML = changetext[i];
+    }
+}
 // Dynamic Data
 function update () {
+	
 	// calculations
 	calculateDate(time);
 	calculateStatistics();
 	calcAttackDefense();
 	// Economy
-	document.getElementById("timeDisplay").innerHTML = years + "y " + days + "d";
+	// Overview
+	document.getElementById("timeDisplay").innerHTML = hours + "h, " + month + ", " + abbr(years) + numberSuffix(years) + " Year"  + ", " + season;
 	document.getElementById("speedDisplay").innerHTML = speed + " is the current speed";
-	document.getElementById("moneyDisplay").innerHTML = "$" + money.toFixed(2) + " + $" + addedmoney.toFixed(2) + "/d";
-	document.getElementById("foodDisplay").innerHTML = food.toFixed(2) + "/" + maxfood.toFixed(2) + " food" + " + " + addedfood.toFixed(2) + "/d";
-	document.getElementById("popDisplay").innerHTML = pop.toFixed(2) + "/" + maxpop.toFixed(2) + " pop" + " + " + addedpop.toFixed(2) + "/d";
-	document.getElementById("territoryDisplay").innerHTML = usedTerritory.toFixed(2) + "/" + territory.toFixed(2) + " territory";
+	// Overviewable Table
+	changeTableRow("overviewTable",1,["money",abbr(money)," ",addedmoney.toFixed(2) + "/d"]);
+	changeTableRow("overviewTable",2,["food",abbr(food),"/"+abbr(maxfood),addedfood.toFixed(2) + "/d"]);
+	changeTableRow("overviewTable",3,["population",abbr(pop),"/"+abbr(maxpop),addedpop.toFixed(2) + "/d"]);
+	changeTableRow("overviewTable",4,["territory",abbr(usedTerritory),"/"+abbr(territory)," "]);
+	
 	// Fun Stats
 	document.getElementById("GDPDisplay").innerHTML = "$" + GDP.toFixed(2) + " is the GDP of your nation!";
 	document.getElementById("unemploymentDisplay").innerHTML = unemployment.toFixed(2) + "% is the unemployment rate of your nation!";
@@ -26,7 +54,7 @@ function update () {
 		document.getElementById(workerArray[i].name + "Display").innerHTML = "You have " + workerArray[i].number + " " + workerArray[i].displayName + plural;
 	}	
 	// Military
-	document.getElementById("militaryPowerDisplay").innerHTML = attack + " ATTK " + defense + " DEFS";
+	document.getElementById("militaryPowerDisplay").innerHTML = attack + " attack " + defense + " defense";
 	
 	document.getElementById("militiamenDisplay").innerHTML = "You have " + militiamen + " militiamen";
 	// Reduces Cluttering and Increases Excitement, Tier 1
@@ -101,9 +129,18 @@ function update () {
 	}
 	*/
 	// No Limiters
-	document.getElementById("farmsDisplay").innerHTML = "There are " + farms + " farms in the kingdom.";
+	
+	/*
+	document.getElementById("farmDisplay").innerHTML = "There are " + farms + " farms in the kingdom.";
 	document.getElementById("houseDisplay").innerHTML = "There are " + house + " houses in the kingdom.";
 	document.getElementById("barnDisplay").innerHTML = "There are " + barn + " barns in the kingdom.";
+	*/
+	
+	for (i=1;i<buildingArray.length;i++){
+		var plural = "";
+		if (buildingArray[i].number > 1 || buildingArray[i].number == 0) {plural = "s";}
+		document.getElementById(buildingArray[i].name + "Display").innerHTML = "There are " + buildingArray[i].number + " " + buildingArray[i].displayName + plural + " in the kingdom.";
+	}	
 	// Test
 	// document.getElementById("test").innerHTML = "test";
 }
