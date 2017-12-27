@@ -72,6 +72,9 @@ var timeStamp = "";
 
 // Initial
 
+var timeInterval = setInterval(passTime,1000);
+var fpsInterval = setInterval(update,20);
+var saveInterval = setInterval(autoSave,30000);
 
 // Floating Point Error Resolver
 function roundTwo (value){
