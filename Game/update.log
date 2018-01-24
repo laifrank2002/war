@@ -1,5 +1,10 @@
 V0.06 P-Alpha
+1/24/2018 0.065
+Standardized Infoline Functions
 
+1/13/2018 0.064
+Added housing types
+Standardized building purchasing functions
 
 12/27/2017 0.063
 Revamped overview table, made it a table, built some functions to handle it.
@@ -28,4 +33,3 @@ Started Update Log
 Seperated counter.js into separate files, renamed counter to main.js
 Added workers
 Added Attack Defense Vars
-

@@ -1,15 +1,20 @@
 document.getElementById("attackEncounter").style.display = "none";
 LoadLocalData();
 
-var timeInterval = setInterval(passTime,1000);
-var fpsInterval = setInterval(update,20);
-var saveInterval = setInterval(autoSave,30000);
-
 // Sets up table for Overview
-insertTableRow("overviewTable",["resource","amount","max","+gain/d"]);
-insertTableRow("overviewTable",["resource","amount","max","+gain/d"]);
-insertTableRow("overviewTable",["resource","amount","max","+gain/d"]);
-insertTableRow("overviewTable",["resource","amount","max","+gain/d"]);
-insertTableRow("overviewTable",["resource","amount","max","+gain/d"]);
+insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
+insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
+insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
+insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
+insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
 
 // Sets up table for Economy
+
+// Sets up all of the infolines automatically
+
+// Sets Buildings Array
+for (i=1;i<buildingArray.length;i++){
+	if(buildingArray[i].display){
+		insertInfoLine("buildingsDisplay",[buildingArray[i].name,"buyBuilding(" + i + ")","Helper Text"]);
+	}
+}	

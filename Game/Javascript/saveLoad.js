@@ -106,7 +106,6 @@ function Set_LocalStorage (object_name,value) {
 	
 	var object_value = btoa(JSON.stringify(value));
 	localStorage.setItem(object_name,object_value);
-	console.log(object_value);
 }
 
 function Get_LocalStorage(object_name){

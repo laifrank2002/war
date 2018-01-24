@@ -36,7 +36,7 @@
 //init
 // Player Stats
 var time = 0;
-var money = 75;
+var money = 175;
 var pop = 0;
 var food = 0;
 
@@ -45,7 +45,7 @@ var usedTerritory = 0;
 // Economy
 var addedmoney = 0.01;
 
-var maxpop = 10;
+var maxpop = 0;
 var addedpop = 0.1;
 
 var maxfood = 100;
@@ -142,12 +142,9 @@ function calculateFood () {
 	addedfood = 0;
 	
 	// production
-	addedfood += (1.5 * buildingArray[1].number);
-	addedfood += (2 * workerArray[1].number);
-	
-	if (well) {
-		addedfood *= 1.5;
-	}
+	addedfood += (1.5 * buildingArray[1].number); // farm
+	addedfood += (2 * workerArray[1].number); // farmer
+	addedfood += (1 * buildingArray[5].number); // countryhouse
 	
 	// consumption
 	addedfood -= (1 * pop);
@@ -171,9 +168,13 @@ function calculatePop () {
 	
 	// max pop
 	
-	maxpop = 10;
-	
-	maxpop += (5 * buildingArray[2].number);
+	maxpop = 0;
+	// Adds housing effects
+	maxpop += (3 * buildingArray[2].number); // house 
+	maxpop += (1 * buildingArray[4].number); // shack
+	maxpop += (3 * buildingArray[5].number); // countryhouse
+	maxpop += (4 * buildingArray[6].number); // townhouse
+	maxpop += (10 * buildingArray[7].number); // apartment
 }
 
 // Button Functions

@@ -18,6 +18,29 @@ function insertTableRow (table,changetext){
         
     }
 }
+// Inserts Infoline Object for the HTML after an element
+
+// Key: changetext 0: p name, 1: onclick fcn 2: tooltiptext
+function insertInfoLine (appendAfterId, changetext){
+	var infoLine = document.createElement('div');
+	var anchorElement = document.getElementById (appendAfterId);
+	
+	infoLine.className = "infoLine";
+	
+	var infoLineInnerHTMLText = "<p type = 'text' id ='" + changetext[0] 
+	+ "Display'></p><div class='tooltip'><button type='button' onclick='" + changetext[1]
+	+ "' id ='" + changetext[0] + "DisplayButton'>Build</button> \
+	<span class='tooltiptext'>" + changetext[2] + "</span>";
+	
+	infoLine.innerHTML = infoLineInnerHTMLText;
+	
+	var anchorElement = document.getElementById (appendAfterId);
+	console.log(anchorElement)
+	//anchorElement.appendChild(infoLine);
+	insertAfter(infoLine, anchorElement);
+
+	
+}
 // Quickly change a row of a table
 function changeTableRow(table,row,changetext){
 	for (i=0;i<changetext.length;i++){
@@ -36,9 +59,9 @@ function update () {
 	document.getElementById("timeDisplay").innerHTML = hours + "h, " + month + ", " + abbr(years) + numberSuffix(years) + " Year"  + ", " + season;
 	document.getElementById("speedDisplay").innerHTML = speed + " is the current speed";
 	// Overviewable Table
-	changeTableRow("overviewTable",1,["money",abbr(money)," ",addedmoney.toFixed(2) + "/d"]);
-	changeTableRow("overviewTable",2,["food",abbr(food),"/"+abbr(maxfood),addedfood.toFixed(2) + "/d"]);
-	changeTableRow("overviewTable",3,["population",abbr(pop),"/"+abbr(maxpop),addedpop.toFixed(2) + "/d"]);
+	changeTableRow("overviewTable",1,["money",abbr(money)," ",addedmoney.toFixed(2) + "/h"]);
+	changeTableRow("overviewTable",2,["food",abbr(food),"/"+abbr(maxfood),addedfood.toFixed(2) + "/h"]);
+	changeTableRow("overviewTable",3,["population",abbr(pop),"/"+abbr(maxpop),addedpop.toFixed(2) + "/h"]);
 	changeTableRow("overviewTable",4,["territory",abbr(usedTerritory),"/"+abbr(territory)," "]);
 	
 	// Fun Stats

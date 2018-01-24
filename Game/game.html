@@ -8,6 +8,7 @@
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="CSS/game.css">
 	<!-- Pre Pre Loading -->
+	<script src="Javascript/preloadedFunctions.js"> </script>
 	<script src="Javascript/dateCalc.js"> </script>
 	<script src="Javascript/numFancy.js"> </script>
 	<!-- Preloaded Functions -->
@@ -35,6 +36,7 @@
 	<div class = "content">
 		<!-- Unmoving non-game content on top -->
 		<div class="headliner">
+			<img src="Images/shipTitle.png" alt="An oldish looking ship." height = "80px" width = "100px" style="float:right">
 			<h1>A Small War</h1>
 			<p>"It's only a little war we want."</p>
 		</div>
@@ -84,7 +86,7 @@
 				<p type = "text" id="happinessDisplay"></p>
 				
 				<h3>Resources</h3>
-				<p type = "text" id=""> </p>
+				<table id = "resourcesTable"></table>
 				
 			</div>
 			
@@ -135,20 +137,21 @@
 				<h2>Buildings</h2>
 				<p>Here, build things that will make your citizens happy and you rich. At least in theory, anyways.</p>
 				
-				<h3>Buildings</h3>
-				
+				<h3 id="buildingsDisplay">Buildings</h3>
+				<!-- Legacy Code
+					
 				<div class = "infoLine"> 
 					<p type = "text" id="farmDisplay"></p> 
 					<div class="tooltip">
-						<button type="button" onclick="buyFarms()">Build</button> 
+						<button type="button" onclick="buyBuilding(1)">Build</button> 
 						<span class="tooltiptext"> Produces 1.5 food each, you'll need it to feed your populace! Costs $10 and 1 territory.</span>
 					</div>
 				</div>
-				
+					
 				<div class = "infoLine"> 
 					<p type = "text" id="houseDisplay"></p> 
 					<div class="tooltip">
-						<button type="button" onclick="buyHouse()" id = "houseDisplayButton">Build</button> 
+						<button type="button" onclick="buyBuilding(2)" id = "houseDisplayButton">Build</button> 
 						<span class="tooltiptext"> Houses 5 extra people in your nation. Costs $75 and 1 territory.</span>
 					</div>
 				</div>
@@ -156,11 +159,11 @@
 				<div class = "infoLine"> 
 					<p type = "text" id="barnDisplay"></p> 
 					<div class="tooltip">
-						<button type="button" onclick="buyBarn()" id ="barnDisplayButton">Build</button> 
+						<button type="button" onclick="buyBuilding(3)" id ="barnDisplayButton">Build</button> 
 						<span class="tooltiptext"> Stores an extra 500 food, in better conditions. Costs $100 and 1 territory.</span>
 					</div>
 				</div>
-				
+				-->
 				<h3>Projects</h3>
 				
 				<div class = "infoLine"> 

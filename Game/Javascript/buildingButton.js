@@ -31,7 +31,10 @@ var buildingArray = [];
 buildingArray[1] = new building("farm","Farm",0,10,1,true);
 buildingArray[2] = new building("house","House",0,75,1,true);
 buildingArray[3] = new building("barn","Barn",0,100,1,true);
-
+buildingArray[4] = new building("shack","Shack",0,10,1,true);
+buildingArray[5] = new building("countryHouse","Country House",0,50,2,true);
+buildingArray[6] = new building("townHouse","Town House",0,100,1,true);
+buildingArray[7] = new building("apartment","Apartments",0,1000,2,true);
 // one off building arrays, ie projects
 var projectArray = [];
 
@@ -68,11 +71,20 @@ soldierArray[15] = new soldier("guardsman","Guardsman",0,15,10,150,false);
 // Purchasing Functions
 
 
-// Condensed Building Function
+// Generalized Building Function
 function buyBuilding(arrayIndex) {
-	
+
+	// Checking if user has enough money and territory to buy a building
+	if (money >= buildingArray[arrayIndex].money && usedTerritory + buildingArray[arrayIndex].land <= territory) {
+		money -= buildingArray[arrayIndex].money;
+		usedTerritory += buildingArray[arrayIndex].land;
+		
+		money = roundTwo(money);
+		usedTerritory=roundTwo(usedTerritory);
+		buildingArray[arrayIndex].number += 1;
+	}
 }
-// This is so the buttons would work
+// Unstandardized Purchasing Functions for Soldiers 
 function buyMilitiamen() {
 	if (pop >= 1){
 		pop -= 1;
@@ -110,7 +122,7 @@ function buyArchers() {
 	}
 }
 
-// Buildings, Territory Costs
+// Unstandardized Purchasing Functions for Buildings
 function buyBarrack () {
 	if (money >= 100 && !(barrack) && (usedTerritory + 2 <= territory)){
 		barrack = true;
@@ -122,19 +134,6 @@ function buyBarrack () {
 		
 		//Alert Messages
 		pushMessage ("Built the barracks.");
-	}
-}
-function buyFarms () {
-	if (money >= 10 && usedTerritory + 1 <= territory) {
-		money -= 10;
-		buildingArray[1].number += 1;
-		usedTerritory += 1;
-
-		money=roundTwo(money);
-		usedTerritory=roundTwo(usedTerritory)
-
-		//Alert Messages
-		pushMessage ("Bought a farm.");
 	}
 }
 
@@ -152,31 +151,6 @@ function buyWell () {
 	}
 }
 
-function buyHouse() {
-	if (money >= 75 && usedTerritory + 1 <= territory) {
-		money -= 75;
-		buildingArray[2].number += 1;
-		usedTerritory += 1;
-
-		money=roundTwo(money);
-		usedTerritory=roundTwo(usedTerritory)
-		//Alert Messages
-		pushMessage ("Bought a house.");
-	}
-}
-
-function buyBarn() {
-	if (money >= 100 && usedTerritory + 1 <= territory) {
-		money -= 100;
-		buildingArray[3].number += 1;
-		usedTerritory += 1;
-		
-		money=roundTwo(money);
-		usedTerritory=roundTwo(usedTerritory)
-		//Alert Messages
-		pushMessage ("Raised a barn.");
-	}
-}
 
 function buyOutpost() {
 	if (money >= 250 && usedTerritory + 3 <= territory) {
