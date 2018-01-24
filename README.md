@@ -1,4 +1,4 @@
 # war
-A Small War, they say. Well, it may not be any smaller any longer...
+This is the source code for A Small War. This is a video game. You can play it.
 gems:
   - jekyll-redirect-from
