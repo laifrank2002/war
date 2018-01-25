@@ -2,6 +2,7 @@
 var overviewTable = document.getElementById("overviewTable");
 var notationSetting = 3;
 
+
 // Quick shortcut function to add commas to numbers and or shorten them
 function abbr (number){
 	return numToReadable(notationSetting,number);
@@ -20,7 +21,7 @@ function insertTableRow (table,changetext){
 }
 // Inserts Infoline Object for the HTML after an element
 
-// Key: changetext 0: p name, 1: onclick fcn 2: tooltiptext
+// Key: changetext 0: p name, 1: onclick fcn, 2: tooltiptext, 3: button text
 function insertInfoLine (appendAfterId, changetext){
 	var infoLine = document.createElement('div');
 	var anchorElement = document.getElementById (appendAfterId);
@@ -29,14 +30,12 @@ function insertInfoLine (appendAfterId, changetext){
 	
 	var infoLineInnerHTMLText = "<p type = 'text' id ='" + changetext[0] 
 	+ "Display'></p><div class='tooltip'><button type='button' onclick='" + changetext[1]
-	+ "' id ='" + changetext[0] + "DisplayButton'>Build</button> \
+	+ "' id ='" + changetext[0] + "DisplayButton'>" + changetext[3] + "</button> \
 	<span class='tooltiptext'>" + changetext[2] + "</span>";
 	
 	infoLine.innerHTML = infoLineInnerHTMLText;
 	
 	var anchorElement = document.getElementById (appendAfterId);
-	console.log(anchorElement)
-	//anchorElement.appendChild(infoLine);
 	insertAfter(infoLine, anchorElement);
 
 	
@@ -47,7 +46,7 @@ function changeTableRow(table,row,changetext){
 		document.getElementById(table).rows[row].cells[i].innerHTML = changetext[i];
     }
 }
-// Dynamic Data
+// Main Dynamic Data, updates every second
 function update () {
 	
 	// calculations
@@ -61,11 +60,11 @@ function update () {
 	// Overviewable Table
 	changeTableRow("overviewTable",1,["money",abbr(money)," ",addedmoney.toFixed(2) + "/h"]);
 	changeTableRow("overviewTable",2,["food",abbr(food),"/"+abbr(maxfood),addedfood.toFixed(2) + "/h"]);
-	changeTableRow("overviewTable",3,["population",abbr(pop),"/"+abbr(maxpop),addedpop.toFixed(2) + "/h"]);
+	changeTableRow("overviewTable",3,["population",Math.round(abbr(pop)),"/"+Math.round(abbr(maxpop)),addedpop.toFixed(2) + "/h"]);
 	changeTableRow("overviewTable",4,["territory",abbr(usedTerritory),"/"+abbr(territory)," "]);
 	
 	// Fun Stats
-	document.getElementById("GDPDisplay").innerHTML = "$" + GDP.toFixed(2) + " is the GDP of your nation!";
+	document.getElementById("GDPDisplay").innerHTML = "$" + abbr(GDP) + " is the GDP of your nation!";
 	document.getElementById("unemploymentDisplay").innerHTML = unemployment.toFixed(2) + "% is the unemployment rate of your nation!";
 	document.getElementById("safetyDisplay").innerHTML = safety.toFixed(2) + "% is how safe citizens think of your nation!";
 	document.getElementById("healthDisplay").innerHTML = health.toFixed(2) + "% is how much healthcare citizens get in your nation!";
@@ -152,12 +151,6 @@ function update () {
 	}
 	*/
 	// No Limiters
-	
-	/*
-	document.getElementById("farmDisplay").innerHTML = "There are " + farms + " farms in the kingdom.";
-	document.getElementById("houseDisplay").innerHTML = "There are " + house + " houses in the kingdom.";
-	document.getElementById("barnDisplay").innerHTML = "There are " + barn + " barns in the kingdom.";
-	*/
 	
 	for (i=1;i<buildingArray.length;i++){
 		var plural = "";

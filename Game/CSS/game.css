@@ -30,6 +30,7 @@ textarea {
 
 }
 .headliner {
+	height : 15vh;
 	margin-bottom : 5px;
 	background-color: white;
 	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper with shodows */
@@ -39,15 +40,15 @@ textarea {
 /* 
  This is so each distinct box is distinct.
 */
-.info {
+.info { /* Main Element */
 	background-color : white; /* So that the player can see the content*/
 	padding : 5px;
 	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper with shodows */
-	width : 600px;
+	
 	margin : 0 10px 0 10px;
 	float : left;
-	
-	height : 580px; /* No everlong trail */
+	width : 50vw;
+	height : 80vh; /* Scalable */
 	overflow : scroll; /* Scrollbars */
 	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */
 	background-image : url("../Images/paper6.jpg"); /* Background papery texture */
@@ -59,6 +60,9 @@ textarea {
 	background-color : white; /* So that the player can see the content*/
 	background-image : url("../Images/paper6.jpg"); /* Background papery texture */
 
+}
+.infoLine {
+	
 }
 .infoLine p {
 	display : inline-block;
@@ -73,27 +77,29 @@ textarea {
 	background-color : white; /* So that the player can see the content*/
 	padding : 5px;
 	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
-	width : 300px;
+	width : 20vw;
 	background-image : url("../Images/paper6.jpg"); /* Background papery texture */
-	
 }
 /* Adds scrolling features for tiny message-box */
 #Messages {
-	height : 580px; /* No everlong trail */
-	width : 300px; /* Constant Width */
+	height : 80vh; /* No everlong trail */
+	width : 25vw; /* Constant Width */
 	float : left;
 	overflow : scroll; /* Scrollbars */
 	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */
 }
 #Messager {
-	height : 580px; /* No everlong trail */
-	width : 300px; /* Constant Width */
+	height : 80vh; /* No everlong trail */
+	width : 15vw; /* Constant Width */
 	
 }
 /* So tooltips show up and stay down when it needs to be */
 .tooltip {
 	display : inline-block;
 	position: relative;
+	/* More Positioning */
+	z-index : 3;
+	overflow : visible;
 }
 .tooltip .tooltiptext {
 	visibility : hidden;
@@ -103,9 +109,10 @@ textarea {
 	padding : 5px 0;
 	border-radius: 6px;
 	font-weight : normal;
+	
 	/* Positioning */
 	position : absolute;
-	z-index: 1;
+	z-index: 5;
 	top: -5px;
     left: 105%;
 	width : 300px;

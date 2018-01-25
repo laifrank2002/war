@@ -77,6 +77,16 @@
 			<button type="button" onclick="FAQTab()">FAQ</button>
 
 			<div class = "infoBox" id="Economy">
+				<h2>Policies</h2>
+				<p>This is where you oversee and manage the macro-economic parts of your country</p>
+				
+				<!-- Slidey thingy to control taxes  -->
+				<div class="sliderContainer"> 
+					<h3>Taxes</h3>
+					<input type="range" min="0" max="10" value="5" class="slider" id="taxesSlider">
+					<p id="taxesDisplay"> 5% </p>
+				</div>
+				
 				<h2>Economy</h2>
 				<p type = "text" id="GDPDisplay"></p>
 				<!-- The Rates -->

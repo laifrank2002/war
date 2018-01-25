@@ -43,7 +43,8 @@ var food = 0;
 var territory = 15;
 var usedTerritory = 0; 
 // Economy
-var addedmoney = 0.01;
+var addedmoney = 0.00;
+var taxRate = 0.05;
 
 var maxpop = 0;
 var addedpop = 0.1;
@@ -129,12 +130,15 @@ function makeResources (){
 // Calculates Adding Values
 function calculateMoney () {
 	
+	// routinely updates taxrate
+	taxRate = roundTwo(taxesSlider.value / 100);
 	addedmoney = 0;
-	addedmoney += pop * 0.01 * (workerArray[3].number + 1);
+	
+	addedmoney += pop * taxRate * (workerArray[3].number + 1);
 	
 	addedmoney = roundTwo(addedmoney);
 	// boosts
-
+	
 	
 }
 
@@ -160,10 +164,10 @@ function calculateFood () {
 
 function calculatePop () {
 	// Initial Growth Rate
-	addedpop = 0.1;
+	addedpop = roundTwo(0.2 * happiness/100); // Immigration is affected by happiness
 	// If there's a famine
 	if (food <= 0) {
-		addedpop = -0.2;
+		addedpop = roundTwo(-0.2 / (happiness/100)); // So is emmigration
 	}
 	
 	// max pop

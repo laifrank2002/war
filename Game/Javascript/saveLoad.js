@@ -75,14 +75,14 @@ function LoadLocalData() {
 	
 	// Worker Array
 	for (i=1;i<worker_save_data.length;i++){
-		workerArray[i].num = worker_save_data[i].num;
+		workerArray[i].number = worker_save_data[i].number;
 	}
 	
 	if (!building_save_data) {return};
 	
 	// Building Array
 	for (i=1;i<building_save_data.length;i++){
-		buildingArray[i] = building_save_data[i];
+		buildingArray[i].number = building_save_data[i].number;
 	}
 	//
 	if (initTrue){

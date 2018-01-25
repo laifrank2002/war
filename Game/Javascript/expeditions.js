@@ -27,6 +27,7 @@ function generateEncounter(){
 		var lootPot = roundTwo( Math.random() * 9 ) + 1;
 		document.getElementById("expeditionsBox").innerHTML = "You manage to find some good land around you that is unclaimed, " + lootPot.toFixed(2) + " territory to be exact!";
 		territory += lootPot;
+		territory = roundTwo (territory);
 	}
 	else if (expeditionResult >= 0.6){
 		resetEncounter();

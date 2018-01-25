@@ -1,6 +1,16 @@
 V0.06 P-Alpha
+
+1/25/2018 0.07
+New background images!
+Workers now save so one doesn't have to reallocate
+Death and taxes added, well, death was always there, so more taxes 
+Taxes also affect migration. Low taxes = low emigration. 
+Rehauled buttons and tooltip text, made sure one knows what one was buying and 
+how much would it cost (And I could be lazy too)
+
 1/24/2018 0.065
 Standardized Infoline Functions
+Added and balanced housing. House, Shack, Apartment, Country, and Townhouse.
 
 1/13/2018 0.064
 Added housing types

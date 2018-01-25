@@ -34,7 +34,8 @@ buildingArray[3] = new building("barn","Barn",0,100,1,true);
 buildingArray[4] = new building("shack","Shack",0,10,1,true);
 buildingArray[5] = new building("countryHouse","Country House",0,50,2,true);
 buildingArray[6] = new building("townHouse","Town House",0,100,1,true);
-buildingArray[7] = new building("apartment","Apartments",0,1000,2,true);
+buildingArray[7] = new building("apartment","Apartment",0,1000,2,true);
+// testing buildingArray[8] = new building("undef","undef",0,0,0,true);
 // one off building arrays, ie projects
 var projectArray = [];
 

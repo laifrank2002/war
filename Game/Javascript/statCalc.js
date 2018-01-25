@@ -48,7 +48,7 @@ function calculateUnemployment (employment,population) {
 function calculateStatistics() { // Meaningless stats
 	
 	calculateUnemployment (employed,pop);
-	GDP = addedmoney * 8760;
+	GDP = pop * 8760;
 	GDP = roundTwo(GDP);
 	
 	// Statistics
@@ -62,7 +62,7 @@ function calculateStatistics() { // Meaningless stats
 		}
 	}
 	health = 0;
-	happiness = 100;
+	happiness = roundTwo(100 - ((taxRate * 75) ** 2));
 }
 
 // Military Power
