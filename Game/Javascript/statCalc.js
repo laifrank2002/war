@@ -11,6 +11,7 @@ var years = 0;
 var season = "Spring";
 var month = "Janurary";
 
+// Calculates time
 function calculateDate (time) {
 	// YY/MM/DD//HH
 	years = Math.floor(time/8760);

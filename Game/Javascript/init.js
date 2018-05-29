@@ -4,13 +4,23 @@ document.getElementById("attackEncounter").style.display = "none";
 LoadLocalData();
 
 // Sets up table for Overview
-insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
-insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
-insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
-insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
-insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
+insertTableRow("overviewTable",["resource","amount","max","+gain/h"]); // [0] and also header
+for (index=0;index<5;index++)
+{
+    insertTableRow("overviewTable",["resource","amount","max","+gain/h"]);
+}	
 
-// Sets up table for Economy
+/*
+	Sets up table for Economy
+ */
+ 
+// Resources Table
+insertTableRow("resourcesTable",["resource name","amount","change/h","market value"]); // [0] and also header
+for (index=1;index<resourceArray.length;index++)
+{
+	insertTableRow("resourcesTable",["x","x","x","x"]);
+	console.log("Hello");
+}
 
 // Sets up all of the infolines automatically
 

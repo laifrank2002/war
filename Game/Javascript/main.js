@@ -1,4 +1,4 @@
-// V0.04 P-Alpha
+// V0.05 P-Alpha
 /* TDL
  Rewrite HTML, the other one at the tippy top that's blue.
 
@@ -39,6 +39,7 @@ var time = 0;
 var money = 175;
 var pop = 0;
 var food = 0;
+var research = 0;
 
 var territory = 15;
 var usedTerritory = 0; 
@@ -52,6 +53,7 @@ var addedpop = 0.1;
 var maxfood = 100;
 var addedfood = 1;
 
+var addedresearch = 0;
 // Misc Stats
 
 // Settings (Cookies)
@@ -99,31 +101,36 @@ function makeResources (){
 	calculateMoney();
 	calculateFood();
 	calculatePop();
+	calculateResearch();
 	
-	// Don't hit the ceiling!
+	// Ensures food is not more than max food
 	if (food <= maxfood){ // <= instead of < so that it can decrease too!
 		food = food + addedfood;
 		food = +((food).toFixed(2));
 	}
-	// Ooops, you can't go under the floor!
+	// Ensures no negative food
 	if (food < 0) {
 		food = 0;
 	}
 	else if (food > maxfood && addedfood > 0){ // Unless It's Under
 		food = maxfood; // Nor Over
 	}
-	// Don't hit the ceiling!
+	// Ensures pop is not more than max pop
 	if (pop <= maxpop){
 		pop = pop + addedpop;
 		pop = +((pop).toFixed(2));
 	}
-	// Ooops, you can't go under the floor!
-	if(pop < 0) { // <= instead of < so that it can decrease too!
+	// Ensures pop is not ever negative
+	if(pop < 0) { 
 		pop = 0;
 	}
 	else if (pop > maxpop && addedpop > 0){
 		pop = maxpop; // Nor Over
 	}
+	
+	// Research
+	research += addedresearch;
+	research = roundTwo(research);
 	
 }
 
@@ -181,6 +188,11 @@ function calculatePop () {
 	maxpop += (10 * buildingArray[7].number); // apartment
 }
 
+function calculateResearch () {
+	// Growthrate = philosophers
+	addedresearch = workerArray[4].number * 0.01;
+	roundTwo(addedresearch);
+}
 // Button Functions
 
 // Settings

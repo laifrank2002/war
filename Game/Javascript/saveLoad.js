@@ -1,10 +1,10 @@
 var initTrue = false;
-var defs_data = ["0.04",0,75,0,0,15,0,0,0,false,0,false,0,0,false,0,0,0,0,0];
+var defs_data = ["0.07",0,75,0,0,15,0,0,0,false,0,false,0,0,false,0,0,0,0,0,0];
 
 // Saves Data in Local Storage Object form
 function SaveLocalData () {
 	// Convinience
-	var toSavedData = ["0.04",time,money,food,pop,territory,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost,usedTerritory];
+	var toSavedData = ["0.07",time,money,food,pop,territory,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost,usedTerritory,research];
 	
 	
 	if(typeof(Storage) !== "undefined"){
@@ -19,7 +19,7 @@ function SaveLocalData () {
 	}
 	
 }
-function resetGame() {
+function resetGame() { // redo this part 
 	if (confirm("Are you sure you want to reset?")){
 		var resultData = defs_data;
 		
@@ -38,6 +38,7 @@ function resetGame() {
 		barn = resultData[13];
 		outpost = resultData[14];
 		usedTerritory = resultData[15];
+		research = resultData[16];
 		
 		workerArray[1] = new worker("farmer","Farmer",0,0);
 		workerArray[2] = new worker("crafter","Craftsman",0,0);
@@ -70,6 +71,7 @@ function LoadLocalData() {
 	barn = resultData[13];
 	outpost = resultData[14];
 	usedTerritory = resultData[15];
+	research = resultData[16];
 	
 	if (!worker_save_data) {return};
 	

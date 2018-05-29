@@ -544,7 +544,7 @@ function SaveLocalData () {
 	// Convinience
 	var toSavedData = ["0.04",time,money,food,pop,territory,militiamen,swordmen,archers,barrack,farms,well,house,barn,outpost];
 	if(typeof(Storage) !== "undefined"){
-		Set_LocalStorage("saveFile",toSavedData);
+		Set_LocalStorage("SmallWarSave",toSavedData);
 		pushMessage("Saved sucessfully");
 	} else {
 		pushMessage("Not saved sucessfully, unable to access local web storage.");
@@ -579,7 +579,7 @@ function LoadData () {
 }
 
 function LoadLocalData() {
-	var save_data = Get_LocalStorage("saveFile");
+	var save_data = Get_LocalStorage("SmallWarSave");
 	LoadIntoProgram(save_data);
 	pushMessage("Loaded!")
 }

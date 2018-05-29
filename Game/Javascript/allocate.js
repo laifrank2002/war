@@ -55,7 +55,7 @@ function fireWorker (arrayIndex){
 	}
 }
 
-// Fields
+// agricultural fields 
 function calcFieldUsage (){
 	var new_fieldsUsed = 0;
 	for (i=0;i<fieldsArray.length;i++){

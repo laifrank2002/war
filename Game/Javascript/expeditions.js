@@ -1,15 +1,24 @@
-// constructor for a nation object
-function expeditionEnemy(expeditionEnemyName,militaryPower,resultLoot){
+/*
+	The expeditions tab for a small war
+*/
+
+// constructor for an enemy
+function expeditionEnemy(expeditionEnemyName,militaryPower,resultLoot)
+{
 	this.name = expeditionEnemyName;
 	this.power = militaryPower;
 	this.loot = resultLoot;
-}
+} // end of constructor expeditionEnemy(expeditionEnemyName,militaryPower,resultLoot)
+
 
 var expeditionEncounter;
 
+// generates a specific expedition encounter based on random chance
 function generateEncounter(){
+	
 	var expeditionResult = Math.random();
-	if (expeditionResult < 0.25){ // Bandits!
+	if (expeditionResult < 0.25){ 
+		// Bandits!
 		resetEncounter();
 		expeditionEncounter = new expeditionEnemy("Bandits",roundTwo( Math.random()*10) + 1,roundTwo( Math.random()*100 ));
 		
@@ -35,6 +44,7 @@ function generateEncounter(){
 	}
 }
 
+// function that determines expedition battles
 function attackEncounter(){
 	if (attack > expeditionEncounter.power){
 		document.getElementById("expeditionsBox").innerHTML = "$" + expeditionEncounter.loot.toFixed(2) + " was captured from the enemy!";
@@ -47,6 +57,7 @@ function attackEncounter(){
 	document.getElementById("attackEncounter").style.display = "none";
 }
 
+// function that resets the expedition tab elements
 function resetEncounter(){
 	document.getElementById("expeditionsBox").innerHTML = "";
 	document.getElementById("attackEncounter").style.display = "none";
