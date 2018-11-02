@@ -31,6 +31,7 @@ workerArray[1] = new worker("farmer","Farmer",0,0);
 workerArray[2] = new worker("crafter","Craftsman",0,0);
 workerArray[3] = new worker("tax collector","Tax Collector",0,1);
 workerArray[4] = new worker("thinker","Philosopher",0,1);
+workerArray[5] = new worker("soldier","Levy Soldier",0,0);
 
 var employed = 0;
 var fieldsUsed = 0;

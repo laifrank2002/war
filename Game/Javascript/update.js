@@ -50,7 +50,11 @@ function insertInfoLine (appendAfterId, changetext){
 	var anchorElement = document.getElementById (appendAfterId);
 	insertAfter(infoLine, anchorElement);
 
-	
+}
+// deletes an unneeded infoLine
+function removeInfoLine(id)
+{
+	document.parentNode.removeChild(document.getElementById(id));
 }
 // Quickly change a row of a table
 function changeTableRow(table,row,changetext)
@@ -64,42 +68,12 @@ function changeTableRow(table,row,changetext)
 function update () {
 	
 	// updates calculations for numbers
-	calculateDate(time);
 	calculateStatistics();
 	calcAttackDefense();
 	
 	// Economy
 	
-	// Overview tab
-	document.getElementById("timeDisplay").innerHTML = hours + "h, " + month + ", " + abbr(years) + numberSuffix(years) + " Year"  + ", " + season;
-	document.getElementById("speedDisplay").innerHTML = speed + " is the current speed";
-	
-	// Overview Table
-	changeTableRow("overviewTable",1
-		,["money"
-		,abbr(money)
-		," "
-		,addedmoney.toFixed(2) + "/h"]);
-	changeTableRow("overviewTable",2
-		,["food"
-		,abbr(food)
-		,"/"+abbr(maxfood)
-		,addedfood.toFixed(2) + "/h"]);
-	changeTableRow("overviewTable",3
-		,["population"
-		,Math.round(abbr(pop))
-		,"/"+Math.round(abbr(maxpop))
-		,addedpop.toFixed(2) + "/h"]);
-	changeTableRow("overviewTable",4
-		,["territory"
-		,abbr(usedTerritory),
-		"/"+abbr(territory),
-		" "]);
-	changeTableRow("overviewTable",5
-		,["research"
-		,abbr(research)
-		," "
-		,abbr(addedresearch)+"/h"]);
+
 	
 	// Automatically updates resources table
 	
@@ -107,7 +81,6 @@ function update () {
 	{
 		changeTableRow("resourcesTable",i,[resourceArray[i].displayName,resourceArray[i].number,resourceArray[i].change,resourceArray[i].money]);
 	}
-	changeTableRow("resourcesTable",1,[resourceArray[1].displayName,resourceArray[1].number,resourceArray[1].change,resourceArray[1].weight]);
 	// Fun Stats
 	document.getElementById("GDPDisplay").innerHTML = "$" + abbr(GDP) + " is the GDP of your nation!";
 	document.getElementById("unemploymentDisplay").innerHTML = unemployment.toFixed(2) + "% is the unemployment rate of your nation!";
@@ -118,7 +91,15 @@ function update () {
 	for (i=1;i<workerArray.length;i++){
 		var plural = "";
 		if (workerArray[i].number > 1 || workerArray[i].number == 0) {plural = "s";}
-		document.getElementById(workerArray[i].name + "Display").innerHTML = "You have " + workerArray[i].number + " " + workerArray[i].displayName + plural;
+		// if element is not found, making a new one.
+		if (document.getElementById(workerArray[i].name + "Display") != null)
+		{
+			document.getElementById(workerArray[i].name + "Display").innerHTML = "You have " + workerArray[i].number + " " + workerArray[i].displayName + plural;
+		}
+		else 
+		{
+			// create a new element.
+		}
 	}	
 	// Military
 	document.getElementById("militaryPowerDisplay").innerHTML = attack + " attack " + defense + " defense";
@@ -151,52 +132,7 @@ function update () {
 		document.getElementById("barrackDisplay").innerHTML = "The Barracks have not been built yet.";
 		document.getElementById("barrackDisplayButton").style.display = "inline";
 	}
-	
-	// Unlock for wells
-	if (farms > 0){
-		if (!(well)) {
-			document.getElementById("wellDisplay").innerHTML = "The well has not been built yet.";
-			document.getElementById("wellDisplayButton").style.display = "inline-block";
-		}
-		else {
-			document.getElementById("wellDisplay").innerHTML = "The well has been built.";
-			document.getElementById("wellDisplayButton").style.display = "none";
-		}
-	}
-	else {
-		document.getElementById("wellDisplayButton").style.display = "none";
-	}
-	// Unlock for outpost
-	if (barrack){
-		if(!(outpost)){
-			document.getElementById("outpostDisplay").innerHTML = "The outpost has not been built yet.";
-			document.getElementById("outpostDisplayButton").style.display = "inline-block";
-		}
-		else {
-			document.getElementById("outpostDisplay").innerHTML = "The outpost has been built.";
-			document.getElementById("outpostDisplayButton").style.display = "none";
-		}
-	}
-	else {
-		document.getElementById("outpostDisplayButton").style.display = "none";
-	}
-	// Unlock for 
-	/*
-	if (){
-		if(!()){
-			
-		
-		}
-		else {
-			
-			
-		}
-	}
-	else {
-		
-	}
-	*/
-	
+
 	// Automatically updates buildings whenever I add new things to that array. But only buildings!
 	
 	for (i=1;i<buildingArray.length;i++){ 
@@ -205,6 +141,5 @@ function update () {
 		document.getElementById(buildingArray[i].name + "Display").innerHTML = "There are " + buildingArray[i].number + " " + buildingArray[i].displayName + plural + " in the kingdom.";
 	}	
 	
-	
-	
 }
+

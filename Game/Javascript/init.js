@@ -35,7 +35,7 @@ if (buildingArray_helperText.length < buildingArray.length){
 
 for (i=1;i<buildingArray.length;i++){
 	if(buildingArray[i].display){
-		insertInfoLine("buildingsDisplay",[buildingArray[i].name,"buyBuilding(" + i + ")",buildingArray_helperText[i]," $"+buildingArray[i].money + ", " + buildingArray[i].land + " land "]);
+		insertInfoLine("buildingsDisplay",[buildingArray[i].name,"buildingArray[" + i + "].buy()",buildingArray_helperText[i]," $"+buildingArray[i].cost + ", " + buildingArray[i].land + " land "]);
 	}
 }	
 
@@ -50,3 +50,6 @@ var taxesDisplay = document.getElementById("taxesDisplay");
 taxesSlider.oninput = function() {
     taxesDisplay.innerHTML = this.value + "%";
 }
+
+passTime();
+game.initialize();

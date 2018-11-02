@@ -1,4 +1,5 @@
 // Tab Button Functions
+// Purely for HTML purposes.
 function EconomyTab () {
 	clearAllTabs();
 	document.getElementById("Economy").style.display = "block";
@@ -71,5 +72,3 @@ function tabAll(display){
 		}
 	}
 }
-// Initialization
-EconomyTab();

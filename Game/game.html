@@ -7,22 +7,7 @@
 	<meta charset = UTF-8/>
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="CSS/game.css">
-	<!-- Pre Pre Loading -->
-	<script src="Javascript/preloadedFunctions.js"> </script>
-	<script src="Javascript/dateCalc.js"> </script>
-	<script src="Javascript/numFancy.js"> </script>
-	<!-- Preloaded Functions -->
-	<script src="Javascript/saveLoad.js"> </script>
-	<script src="Javascript/buildingButton.js"> </script>
-	<script src="Javascript/update.js"> </script>
-	<script src="Javascript/allocate.js"> </script>
-	<script src="Javascript/statCalc.js"> </script>
-	<script src="Javascript/military.js"> </script>
-	<script src="Javascript/expeditions.js"> </script>
-	<script src="Javascript/resources.js"> </script>
-
-	<!-- Main script -->
-	<script src="Javascript/main.js"> </script>
+	
 	<!-- Google APIs -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 	<!-- Favicons! -->
@@ -38,33 +23,30 @@
 		<div class="headliner">
 			<img src="Images/shipTitle.png" alt="An oldish looking ship." height = "80px" width = "100px" style="float:right">
 			<h1>A Small War</h1>
-			<p>"It's only a little war we want."</p>
 		</div>
 		<!-- Where the overview is -->
-		<div class="overview">
-			<!-- Information -->
-			<div class = "infoBox" id="Overview">
-				<h2>Overview</h2>
-				<p type = "text" id="timeDisplay"></p>
-				<p type = "text" id="speedDisplay"></p> 
-				<div class="tooltip">
-					<button type="button" onclick="speedUp()">Speed Up</button>
-					<span class="tooltiptext"> Makes time go faster! Cannot go above than 10.</span>
-				</div>
-				<div class="tooltip">
-					<button type="button" onclick="slowDown()">Slow Down</button>
-					<span class="tooltiptext"> Slows time down! Cannot go below 0.</span>
-				</div>
-				<table id = "overviewTable"></table>
-				
+
+		<!-- Information -->
+		<div class = "overview infoBox" id="Overview">
+			<h2>Overview</h2>
+			<p type = "text" id="timeDisplay"></p>
+			<p type = "text" id="speedDisplay"></p> 
+			<div class="tooltip">
+				<button type="button" onclick="game.speedUp()">Speed Up</button>
+				<span class="tooltiptext"> Makes time go faster! Cannot go above than 10.</span>
 			</div>
+			<div class="tooltip">
+				<button type="button" onclick="game.slowDown()">Slow Down</button>
+				<span class="tooltiptext"> Slows time down! Cannot go below 0.</span>
+			</div>
+			<table id = "overviewTable"></table>
+			
 		</div>
-		
-		
+
 		<!-- Main Element -->
 		<div class = "info">
 			<h1>A Small War</h1>
-			<p>Welcome General, to your nation! Here are the latest statistics on your nation.</p>
+			<p>Welcome to your nation! Here are the latest statistics on your nation.</p>
 			<!-- Switching NavBar -->
 			<button type="button" onclick="showAllTabs()">Show All</button>
 			<button type="button" onclick="EconomyTab()">Economy</button>
@@ -97,7 +79,7 @@
 				
 				<h3>Resources</h3>
 				<table id = "resourcesTable"></table>
-				
+				<div id = "resourcesPanel"></div>
 			</div>
 			
 			<div class = "infoBox" id="Allocation">
@@ -230,6 +212,23 @@
 					<button type="button" onclick="LoadLocalData()">Load from Local</button>
 					<button type="button" onclick="resetGame()">Reset</button>
 				</div>
+				
+				<div>
+					<form action="">
+						Font: 
+						<input type="radio" name="settings_font" value="Tangerine" onchange="changeFont('Tangerine');" checked="checked" > Tangerine
+						<input type="radio" name="settings_font" value="Courier" onchange="changeFont('Courier New');"> Courier New
+						<input type="radio" name="settings_font" value="Monospace" onchange="changeFont('Monospace');"> Monospace
+						<input type="radio" name="settings_font" value="Arial" onchange="changeFont('Arial');"> Arial
+					</form>
+					
+					<form action="">
+						Text Size:
+						<input type="radio" name="settings_font_size" value="12" onchange="changeFontSize('1em')"> Small
+						<input type="radio" name="settings_font_size" value="18" onchange="changeFontSize('1.5em')"> Medium
+						<input type="radio" name="settings_font_size" value="24" onchange="changeFontSize('2em')" checked="checked" > Large
+					</form>
+				</div>
 				<p>Created by Francis Valeria(Frank Lai), 2017, with a lot of trial, error, and frustration.</p>
 				<p>This is the v 0.005 Pre-Alpha </p> <a href="update.log" target="_blank">Update Log</a>
 				<a href="../index.html" target="_blank">Back to me</a>
@@ -256,7 +255,30 @@
 				<!-- Appended Messages -->
 			</div>
 		</div>
+		<!-- Script -->
+		<script src="Javascript/engine.js"> </script>
+		<!-- Pre Pre Loading -->
+		<script src="Javascript/preloadedFunctions.js"> </script>
+		<script src="Javascript/dateCalc.js"> </script>
+		<script src="Javascript/numFancy.js"> </script>
+		<!-- Preloaded Functions -->
+		<script src="Javascript/saveLoad.js"> </script>
+		<script src="Javascript/building.js"> </script>
+		<script src="Javascript/update.js"> </script>
+		<script src="Javascript/allocate.js"> </script>
+		<script src="Javascript/statCalc.js"> </script>
+		<script src="Javascript/military.js"> </script>
+		<script src="Javascript/expeditions.js"> </script>
+		<script src="Javascript/resources.js"> </script>
+		<script src="Javascript/city.js"> </script>
+		<script src="Javascript/inventory.js"> </script><!-- Relies even more so on HTML for DOM elements -->
+		<!-- Main script -->
+		<script src="Javascript/main.js"> </script>
+	
+		<!-- Post HTML -->
 		<script src="Javascript/navDisplay.js"> </script><!-- So the switcheroo will work, loading uncluttered script -->
+		<script src="Javascript/cssManager.js"> </script><!-- Font and css, cosmetic changes! -->
+		<script src="Javascript/messages.js"> </script> <!-- Relies on HTML -->
 		<script src="Javascript/init.js"> </script><!-- Init that requires all the other stuff to be already present -->
 	</div>
 	

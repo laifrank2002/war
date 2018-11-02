@@ -73,17 +73,18 @@ textarea {
 }
 /* Resource Info Box*/
 .overview {
-	float : left; /* So it would not conflict with the centerpiece */
+	float: left;
 	background-color : white; /* So that the player can see the content*/
 	padding : 5px;
 	box-shadow: 4px 8px 32px 4px rgba(0,0,0,0.2); /* Makes it look like paper */
-	width : 20vw;
 	background-image : url("../Images/paper6.jpg"); /* Background papery texture */
+	width: 22vw;
 }
+
 /* Adds scrolling features for tiny message-box */
 #Messages {
 	height : 80vh; /* No everlong trail */
-	width : 25vw; /* Constant Width */
+	width : 22vw; /* Constant Width */
 	float : left;
 	overflow : scroll; /* Scrollbars */
 	overflow-x: hidden; /* Get's rid of ugly horizontal scroll bar */

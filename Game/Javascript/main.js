@@ -1,7 +1,10 @@
 // V0.05 P-Alpha
 /* TDL
- Rewrite HTML, the other one at the tippy top that's blue.
-
+	rewrite HTML
+	overhaul attempt #2
+	based on Clocks-In-A-Cooler's methods
+	decentralization and modularization
+	
  FAQ
  Restart Button
  Introduction to Game
@@ -33,9 +36,56 @@
 		Nationals 0.5 (People not under direct jurisdiction, produces a little tax money) (Can turn into Peasants)
 */
 
+var MAX_SPEED = 10;
+
 //init
-// Player Stats
-var time = 0;
+var game = {
+	
+	// time, the healer. important data
+	time: 0,
+	// settings data
+	speed: 1,
+	// resources
+	money: new Resource("money","Argentum",100,10000,0,true),
+	
+	speedUp: function() 
+	{
+		if (game.speed < MAX_SPEED){ 
+			// They can't go *too* fast.
+			game.speed += 1;
+			clearInterval(timeInterval) 
+			timeInterval = setInterval(passTime,1000/game.speed);
+			// Change speed display locally in order to save on calculations
+			document.getElementById("speedDisplay").innerHTML = game.speed + " is the current speed";
+		}
+	},
+	
+	
+	slowDown: function() 
+	{
+		if (game.speed > 1){
+			game.speed -= 1;
+			clearInterval(timeInterval) 
+			timeInterval = setInterval(passTime,1000/game.speed);
+			// Change speed display locally in order to save on calculations
+			document.getElementById("speedDisplay").innerHTML = game.speed + " is the current speed";
+		}
+		else if (game.speed = 1){
+			// Pauses
+			game.speed -= 1;
+			clearInterval(timeInterval) 
+			// Change speed display locally in order to save on calculations
+			document.getElementById("speedDisplay").innerHTML = game.speed + " is the current speed";
+		}
+	},
+	
+	initialize: function() 
+	{
+		document.getElementById("speedDisplay").innerHTML = game.speed + " is the current speed";
+	},
+	
+};
+
 var money = 175;
 var pop = 0;
 var food = 0;
@@ -54,20 +104,11 @@ var maxfood = 100;
 var addedfood = 1;
 
 var addedresearch = 0;
-// Misc Stats
 
-// Settings (Cookies)
-var speed = 1;
-
-
-// One timers
+// One timers - TO BE DEPRACTED
 var barrack = false;
 var well = false;
 var outpost = false;
-// Unlimited
-var farms = 0;
-var house = 0;
-var barn = 0;
 
 // Messages module declarations
 var messages = 0;
@@ -85,16 +126,53 @@ function roundTwo (value){
 }
 
 function passTime () {
-	time = time + 1;
-	// Time, the healer, updates values!
-	makeResources();
-	// Updates Timestamp
-	timeStamp = years.toString() + " y " + days.toString() + " d " + ":";
 	
+	// Time, the healer, updates values!
+	game.time = game.time + 1;
+	updateResources();
+	// Updates Timestamp and Date
+	timeStamp = years.toString() + " y " + days.toString() + " d " + ":";
+	calculateDate(game.time);
+	// Updates Overview Timeslot
+	
+	// Overview tab
+	document.getElementById("timeDisplay").innerHTML = hours + "h, " + month + ", " + abbr(years) + numberSuffix(years) + " Year"  + ", " + season;
+	
+	// Overview Table
+	changeTableRow("overviewTable",1
+		,["money"
+		,abbr(money)
+		," "
+		,addedmoney.toFixed(2) + "/h"]);
+	changeTableRow("overviewTable",2
+		,["food"
+		,abbr(food)
+		,"/"+abbr(maxfood)
+		,addedfood.toFixed(2) + "/h"]);
+	changeTableRow("overviewTable",3
+		,["population"
+		,Math.round(abbr(pop))
+		,"/"+Math.round(abbr(maxpop))
+		,addedpop.toFixed(2) + "/h"]);
+	changeTableRow("overviewTable",4
+		,["territory"
+		,abbr(usedTerritory),
+		"/"+abbr(territory),
+		" "]);
+	changeTableRow("overviewTable",5
+		,["research"
+		,abbr(research)
+		," "
+		,abbr(addedresearch)+"/h"]);
 }
 
 
-function makeResources (){
+function updateResources(){
+	
+	// Tick and update for Inventory Resources module
+	Inventory.tick();
+	
+	// TO BE OVERHAULED
 	money = money + addedmoney;
 	money = +((money).toFixed(2));
 	
@@ -120,12 +198,12 @@ function makeResources (){
 		pop = pop + addedpop;
 		pop = +((pop).toFixed(2));
 	}
-	// Ensures pop is not ever negative
+	// Ensures pop is not ever negative or over max
 	if(pop < 0) { 
 		pop = 0;
 	}
 	else if (pop > maxpop && addedpop > 0){
-		pop = maxpop; // Nor Over
+		pop = maxpop; 
 	}
 	
 	// Research
@@ -195,66 +273,14 @@ function calculateResearch () {
 }
 // Button Functions
 
-// Settings
-function speedUp() {
-	if (speed < 10){ //They can't go *too* fast.
-		speed += 1;
-		clearInterval(timeInterval) // So not to produce multiple
-		timeInterval = setInterval(passTime,1000/speed);
-	}
-}
-function slowDown() {
-	if (speed > 1){
-		speed -= 1;
-		clearInterval(timeInterval) // So that it wouldn't just keep increasing
-		timeInterval = setInterval(passTime,1000/speed);
-	}
-	else if (speed = 1){
-		speed -= 1;
-		clearInterval(timeInterval) //Pauses
-	}
-}
 
-// Create Messages
-function pushMessage (messageText) {
-	var messageNode = document.createElement("p");
-	var messageContents = document.createTextNode(timeStamp + messageText);
-	messageNode.appendChild(messageContents)
-	
-	var element = document.getElementById("messager")
-	var child = document.getElementById("messageIntro")
-	
-	element.appendChild(messageNode);
-	
-	// Scrolls Down Automatically
-	document.getElementById("Messages").scrollTop += 500;
-	messages += 1
-}
-function clearMessages (){
-	document.getElementById("messager").innerHTML = "";
-}
-// Loads Other Messages
-function loadStoryMessage(messageName){
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			pushMessage(this.responseText);
-			console.log("Sucess!")
-		}
-	};
-	xhttp.open("GET", messageName, true);
-	xhttp.send();
-}
-
-
+// autoSave
 function autoSave(){
 	SaveLocalData();
-	LoadLocalData();
 }
 
 function setAutoSave(delay){
 	clearInterval(saveInterval) //Prevents duplicates
 	setInterval(autoSave,delay)
 }
-
 
